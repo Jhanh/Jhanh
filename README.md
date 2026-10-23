@@ -20,12 +20,27 @@
   </picture>
 </div>
 
-<!-- =========================================
-     🏙️ 3D CONTRIBUTION CITY 🏙️
-========================================== -->
+<!-- TIC-TAC-TOE:START -->
+<!-- TIC-TAC-TOE-STATE: {"board": [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]], "status": "\ud83c\udfae V\u00e1n m\u1edbi \u0111\u00e3 \u0111\u01b0\u1ee3c t\u1ea1o b\u1edfi @Jhanh! \u0110\u1ebfn l\u01b0\u1ee3t b\u1ea1n (**\u274c**).", "score": {"X": 0, "O": 0, "Ties": 0}} -->
 <div align="center">
-  <img src="profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution City" width="100%" />
+
+### 🎮 Cờ Caro (Tic-Tac-Toe) vs Jhanh Bot
+> 🎮 Ván mới đã được tạo bởi @Jhanh! Đến lượt bạn (**❌**).
+
+| | Cột 1 | Cột 2 | Cột 3 |
+| :---: | :---: | :---: | :---: |
+| **Hàng 1** | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C0%7C0&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C0%7C1&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C0%7C2&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; |
+| **Hàng 2** | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C1%7C0&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C1%7C1&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C1%7C2&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; |
+| **Hàng 3** | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C2%7C0&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C2%7C1&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; | &nbsp;&nbsp;[&nbsp;⬜&nbsp;](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7C2%7C2&body=Click+%27Submit+new+issue%27+without+changing+anything+to+make+this+move!)&nbsp;&nbsp; |
+
+🏆 **Tỉ số:** Người chơi (❌) `0` — `0` Jhanh Bot (⭕) *(Hòa: `0`)*
+
+👉 **[🔄 Bắt đầu ván mới (Reset Game)](https://github.com/Jhanh/Jhanh/issues/new?title=ttt%7Creset&body=Click+%27Submit+new+issue%27+to+start+a+new+game!)**
+
+<sub><i>(Mẹo: Nhấn vào ô trống ⬜ hoặc Reset ➔ Bấm <b>Submit new issue</b> để đi nước cờ)</i></sub>
+
 </div>
+<!-- TIC-TAC-TOE:END -->
 
 <!-- =========================================
      🌊 FOOTER WAVE 🌊
