@@ -1,0 +1,56 @@
+# IDE & Editor Settings (VS Code, JetBrains, etc.)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System Files
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+.directory
+.fuse_hidden*
+.Trash-*
+
+# Logs & Temporary Files
+*.log
+*.tmp
+*.bak
+*.swp
+tmp/
+temp/
+.cache/
+
+# Sensitive Information & Environment Variables
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# Build Outputs & Binary Files (just in case)
+*.exe
+*.o
+*.obj
+*.out
+*.dll
+*.so
+*.dylib
+dist/
+build/
+
