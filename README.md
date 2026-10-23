@@ -24,22 +24,7 @@
      🏙️ 3D CONTRIBUTION CITY 🏙️
 ========================================== -->
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-night-rainbow.svg">
-    <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-green-animate.svg">
-    <img alt="3D Contribution City" src="profile-3d-contrib/profile-night-rainbow.svg" width="100%" />
-  </picture>
-</div>
-
-<!-- =========================================
-     🏙️ 3D CONTRIBUTION CITY 🏙️
-========================================== -->
-<div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-night-rainbow.svg">
-    <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-green-animate.svg">
-    <img alt="3D Contribution City" src="profile-3d-contrib/profile-night-rainbow.svg" width="100%" />
-  </picture>
+  <img src="profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution City" width="100%" />
 </div>
 
 <!-- =========================================
@@ -50,4 +35,3 @@
 
   <sub>Crafted with passion & curiosity by <b><a href="https://github.com/Jhanh">Nguyễn Quốc Khánh</a></b> • © 2026</sub>
 </div>
-
