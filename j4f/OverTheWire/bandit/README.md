@@ -97,16 +97,16 @@ Chặng đường 34 màn chơi (từ Level 0 đến Level 33) được chia là
 
 | Bài học | Chủ đề chính | Tập lệnh / Công cụ sử dụng |
 | :--- | :--- | :--- |
-| [Bandit 0](bandit0.md) | Giới thiệu & Kết nối SSH lần đầu | `ssh` |
-| [Bandit 1](bandit1.md) | Đọc tệp có tên đặc biệt (dấu gạch ngang `-`) | `cat ./-`, `cat -- -` |
-| [Bandit 2](bandit2.md) | Đọc tệp có khoảng trắng trong tên | `cat "spaces in this filename"` |
-| [Bandit 3](bandit3.md) | Đọc tệp ẩn trong thư mục | `ls -la`, `cat .hidden` |
-| [Bandit 4](bandit4.md) | Nhận diện tệp người đọc được bằng chữ ký tệp | `file ./*` |
-| [Bandit 5](bandit5.md) | Tìm tệp theo kích thước, quyền và thuộc tính | `find . -size 1033c ! -executable` |
-| [Bandit 6](bandit6.md) | Quét toàn bộ hệ thống lọc theo User, Group và Size | `find / -user ... -group ... 2>/dev/null` |
-| [Bandit 7](bandit7.md) | Tìm kiếm từ khóa trong tệp văn bản lớn | `grep "millionth" data.txt` |
-| [Bandit 8](bandit8.md) | Tìm dòng văn bản xuất hiện duy nhất | `sort data.txt \| uniq -u` |
-| [Bandit 9](bandit9.md) | Trích xuất chuỗi ký tự trong tệp nhị phân | `strings data.txt \| grep "==="` |
+| [Bandit 0](bandit00.md) | Giới thiệu & Kết nối SSH lần đầu | `ssh` |
+| [Bandit 1](bandit01.md) | Đọc tệp có tên đặc biệt (dấu gạch ngang `-`) | `cat ./-`, `cat -- -` |
+| [Bandit 2](bandit02.md) | Đọc tệp có khoảng trắng trong tên | `cat "spaces in this filename"` |
+| [Bandit 3](bandit03.md) | Đọc tệp ẩn trong thư mục | `ls -la`, `cat .hidden` |
+| [Bandit 4](bandit04.md) | Nhận diện tệp người đọc được bằng chữ ký tệp | `file ./*` |
+| [Bandit 5](bandit05.md) | Tìm tệp theo kích thước, quyền và thuộc tính | `find . -size 1033c ! -executable` |
+| [Bandit 6](bandit06.md) | Quét toàn bộ hệ thống lọc theo User, Group và Size | `find / -user ... -group ... 2>/dev/null` |
+| [Bandit 7](bandit07.md) | Tìm kiếm từ khóa trong tệp văn bản lớn | `grep "millionth" data.txt` |
+| [Bandit 8](bandit08.md) | Tìm dòng văn bản xuất hiện duy nhất | `sort data.txt \| uniq -u` |
+| [Bandit 9](bandit09.md) | Trích xuất chuỗi ký tự trong tệp nhị phân | `strings data.txt \| grep "==="` |
 | [Bandit 10](bandit10.md) | Giải mã chuỗi dữ liệu Base64 | `base64 -d data.txt` |
 | [Bandit 11](bandit11.md) | Giải mã mật mã Caesar / ROT13 | `tr 'A-Za-z' 'N-ZA-Mn-za-m'` |
 | [Bandit 12](bandit12.md) | Dịch ngược nén dữ liệu nhị phân đa tầng | `xxd -r`, `gzip`, `bzip2`, `tar` |
