@@ -71,4 +71,3 @@ Sau khi đã vào được bên trong máy chủ (dấu nhắc `bandit0@bandit:~
 ```text
 Password bandit1: [6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR]
 ```
-

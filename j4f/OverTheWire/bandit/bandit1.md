@@ -59,4 +59,3 @@ ssh bandit1@bandit.labs.overthewire.org -p 2220
 ```text
 Password bandit2: [PK8fYLZg2hnHSz83plBL1iEPKdD3QToB]
 ```
-
