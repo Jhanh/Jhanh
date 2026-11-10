@@ -1,7 +1,6 @@
 # IDE & Editor Settings (VS Code, JetBrains, etc.)
 .vscode/
 .idea/
-.agents/
 *.swp
 *.swo
 *~
