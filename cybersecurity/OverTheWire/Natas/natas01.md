@@ -117,4 +117,3 @@ curl.exe -s -u natas1:scfWG6qNEIdzqVyfRwEGXyNUfFZkZeQ7 http://natas1.natas.labs.
 ```text
 Password natas2: [vsDOxoXyq3wckCP1ZmTZ71ngIA606odB]
 ```
-
