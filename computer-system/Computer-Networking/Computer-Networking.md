@@ -71,16 +71,27 @@ QUÁ TRÌNH ĐÓNG GÓI (ENCAPSULATION) VÀ GIẢI ĐÓNG GÓI (DECAPSULATION)
 Internet là **"Mạng của các mạng" (Network of networks)** kết nối hàng tỷ thiết bị tính toán (*Hosts / End Systems*).
 
 - **Thiết bị đầu cuối (Hosts / End Systems)**: Máy tính bàn, laptop, smartphone, IoT, server. Chạy các chương trình ứng dụng mạng (Network Applications).
+
 - **Đường truyền thông (Communication Links)**:
+
   - Cáp sợi quang (*Fiber optics*): Băng thông khổng lồ, suy hao thấp, dùng cho tuyến trục đường dài và xuyên đại dương.
+
   - Cáp đồng (*Twisted pair, Coaxial*): Phổ biến cho mạng LAN (cáp CAT5e/CAT6), truyền hình cáp.
+
   - Sóng vô tuyến (*Radio / Wi-Fi / 4G / 5G*): Linh hoạt, không dây, suy hao theo khoảng cách và vật cản.
+
   - Vệ tinh (*Satellite - LEO như Starlink, GEO*): Phủ sóng vùng sâu vùng xa, độ trễ phụ thuộc quỹ đạo.
+
 - **Thiết bị chuyển mạch gói (Packet Switches)**:
+
   - **Router**: Chuyển tiếp gói tin giữa các mạng khác nhau (hoạt động ở Tầng 3 - Network Layer).
+
   - **Link-layer Switch**: Chuyển tiếp khung dữ liệu trong nội bộ mạng LAN (hoạt động ở Tầng 2 - Data Link Layer).
+
 - **Giao thức (Protocols)**:
+
   - Định nghĩa **cú pháp (syntax)**, **ngữ nghĩa (semantics)**, **thứ tự** trao đổi thông điệp giữa các thực thể và **hành động** được kích hoạt khi gửi/nhận thông điệp hoặc khi có sự kiện xảy ra.
+
   - Chuẩn hóa bởi tổ chức **IETF** thông qua các tài liệu **RFC (Request for Comments)**.
 
 ```text
@@ -114,57 +125,89 @@ CẤU TRÚC PHÂN CẤP INTERNET (ISP TIER STRUCTURE)
 
 ### A. Định tuyến (Routing) vs Chuyển tiếp (Forwarding)
 Hai chức năng cơ bản nhất của phần lõi mạng (Network Core):
+
 - `Routing` (Định tuyến): Quá trình tìm đường đi logic tối ưu từ máy gửi xuyên qua toàn bộ hệ thống mạng đến máy nhận.
+
   - Phạm vi: **Toàn cục (Network-wide)**.
+
   - Do các thuật toán định tuyến (*Routing Algorithms* như OSPF, BGP) phối hợp tính toán để xây dựng nên **Bảng định tuyến (Routing Table)**.
+
 - `Forwarding` (Chuyển tiếp): Hành động cục bộ của router khi nhận được một gói tin ở cổng vào (*input port*) và chuyển gói tin đó sang cổng xuất (*output port*) thích hợp.
+
   - Phạm vi: **Cục bộ (Node-local)**, diễn ra trong phần cứng router với tốc độ nano-giây dựa trên **Bảng chuyển tiếp (Forwarding Table)**.
 
 > [!NOTE]
 > **Ví dụ thực tế:**
+>
 > - **Routing** giống như việc bạn mở bản đồ Google Maps lên để lên kế hoạch chọn tuyến đường đi từ Hà Nội vào TP.HCM (tính toán toàn cục).
+>
 > - **Forwarding** giống như khi xe chạy đến từng ngã tư cụ thể, bạn nhìn biển chỉ dẫn để quyết định rẽ trái, rẽ phải hay đi thẳng (hành động cục bộ).
 
 ---
 
 ### B. Băng thông (Bandwidth) vs Thông lượng (Throughput)
+
 - `Bandwidth` (Băng thông): Tốc độ truyền dữ liệu tối đa trên **lý thuyết** của một đường truyền vật lý trong 1 giây.
+
   - Đơn vị đo: bps (bits/s), Kbps, Mbps, Gbps.
+
   - *Ví dụ:* Là **độ rộng tối đa** của con đường cao tốc.
+
 - `Throughput` (Thông lượng): Tốc độ truyền tải dữ liệu **thực tế** đo được giữa bên gửi và bên nhận tại một thời điểm hoặc trung bình qua thời gian.
+
   - Luôn luôn $\le$ Băng thông do bị ảnh hưởng bởi độ trễ, hao hụt tín hiệu, hàng đợi tắc nghẽn và giao thức điều khiển luồng.
+
   - Bị giới hạn trực tiếp bởi liên kết có tốc độ thấp nhất trên toàn tuyến đường (**Nguyên lý nút thắt cổ chai - Bottleneck Link**).
+
   - *Ví dụ:* Là **lượng xe thực tế** đang lưu thông qua con đường đó.
 
 ---
 
 ### C. Các phương thức gửi tin (Transmission / Cast Modes)
+
 - `Unicast` (1-to-1): Truyền từ **1 máy gửi tới đúng 1 máy nhận duy nhất**.
+
   - Ví dụ: Duyệt web HTTP/HTTPS, tải file FTP, phiên SSH.
+
 - `Broadcast` (1-to-all): Truyền từ **1 máy gửi tới TẤT CẢ các máy khác** trong cùng một miền quảng bá (Local Network / Broadcast Domain).
+
   - Thường dùng trong các giao thức khám phá cấu hình tự động.
+
   - Ví dụ: Gói tin **DHCP Discover** (tìm server cấp IP), gói tin **ARP Request** (tìm địa chỉ MAC đích bằng địa chỉ phát sóng `FF:FF:FF:FF:FF:FF`).
+
 - `Multicast` (1-to-many): Truyền từ **1 máy gửi tới một NHÓM máy xác định** có đăng ký tham gia nhóm (*Multicast Group*).
+
   - Giúp tiết kiệm băng thông khi truyền cùng một nội dung cho nhiều người cùng lúc.
+
   - Ví dụ: Truyền hình trực tiếp qua mạng (IPTV), livestream hội nghị trực tuyến, cập nhật bảng định tuyến OSPF/RIP.
+
 - `Anycast` (1-to-nearest): Gửi từ 1 máy tới **máy chủ gần nhất** về mặt định tuyến mạng trong một cụm các máy chủ cùng dùng chung 1 địa chỉ IP (được triển khai cực kỳ phổ biến trong hệ thống 13 cụm DNS Root toàn cầu và mạng phân phối nội dung CDN của Cloudflare, Google).
 
 ---
 
 ### D. Các chế độ truyền dẫn (Duplex Modes)
+
 - `Simplex` (Đơn công): Dữ liệu chỉ có thể truyền theo **một chiều duy nhất** cố định.
+
   - Ví dụ: Truyền hình vệ tinh, phát thanh Radio FM, tín hiệu chuột/bàn phím gửi vào máy tính.
+
 - `Half-duplex` (Bán song công): Dữ liệu có thể truyền theo cả 2 chiều, nhưng **KHÔNG ĐƯỢC cùng một lúc** (tại một thời điểm, thiết bị chỉ có thể gửi HOẶC nhận).
+
   - Ví dụ: Máy bộ đàm Walkie-Talkie (khi nói thì không thể nghe đối phương), mạng Ethernet cổ điển dùng Hub chung môi trường (áp dụng thuật toán phát hiện xung đột CSMA/CD), mạng Wi-Fi không dây chuẩn 802.11.
+
 - `Full-duplex` (Song công toàn phần): Dữ liệu có thể gửi VÀ nhận **đồng thời tại cùng một thời điểm**.
+
   - Ví dụ: Cuộc gọi điện thoại (hai người có thể nói và nghe cùng lúc), mạng Ethernet hiện đại nối qua Switch (sử dụng 2 cặp dây riêng biệt: một cặp chuyên truyền TX (Transmit) và một cặp chuyên nhận RX (Receive), triệt tiêu hoàn toàn xung đột tín hiệu).
 
 ---
 
 ### E. Cấu trúc thiết bị Gateway gia đình (All-in-one Home Gateway)
 Hộp thiết bị mạng quen thuộc tại mỗi gia đình (thường được gọi ngắn gọn là "Cục Modem" hay "Router Wi-Fi") thực tế là thiết bị tích hợp **3 phần cứng chuyên trách độc lập trong 1 thân máy**:
+
 1. `Modem` (Modulator / Demodulator): Chuyển đổi tín hiệu quang (*PON / AON*) từ nhà cung cấp dịch vụ mạng (ISP) thành chuỗi bit điện số (*Digital Bits*).
+
 2. `Router`: Định tuyến lưu lượng giữa mạng LAN nội bộ gia đình (dải IP Private `192.168.1.0/24`) và mạng Internet công cộng (WAN), chạy máy chủ **DHCP** để tự động cấp phát IP, và thực hiện biên dịch địa chỉ **NAT** để bảo mật dải IP nội bộ.
+
 3. `Access Point (AP)`: Điểm truy cập không dây, phát sóng radio Wi-Fi để làm cầu nối cho các thiết bị không dây (smartphone, laptop) hòa vào mạng LAN có dây.
 
 ---
@@ -172,11 +215,15 @@ Hộp thiết bị mạng quen thuộc tại mỗi gia đình (thường đượ
 ### F. RTT (Round-Trip Time) & TTL (Time-To-Live)
 
 - **RTT (Round-Trip Time)**:
+
   - **Lý thuyết**: Là khoảng thời gian (tính bằng mili-giây, ms) cần thiết để một gói tin dữ liệu đi từ máy gửi đến máy nhận và nhận lại tín hiệu phản hồi (ACK / Reply).
+
   - **Ý nghĩa**: Thước đo trực tiếp phản ánh độ trễ mạng, được đo qua lệnh `ping` và là cơ sở cốt lõi để các giao thức (như TCP) tính toán thời gian chờ timeout và kiểm soát tốc độ truyền dữ liệu.
 
 - **TTL (Time-To-Live)**:
+
   - **Lý thuyết**: Là cơ chế ấn định thời gian sống hoặc số bước nhảy (Hop) tối đa cho một gói tin hoặc bản ghi dữ liệu trước khi nó bị hủy bỏ.
+
   - **Ý nghĩa**: Ngăn chặn tình trạng gói tin bay vô tận làm tê liệt hệ thống khi xảy ra vòng lặp định tuyến (*Routing Loop*), đồng thời giúp tự động giải phóng các bản ghi tạm thời (*Cache*) đã lỗi thời.
 
 ---
@@ -185,9 +232,13 @@ Hộp thiết bị mạng quen thuộc tại mỗi gia đình (thường đượ
 
 ### A. Circuit Switching (Chuyển mạch kênh)
 Tài nguyên mạng (băng thông, khe thời gian) dọc theo tuyến đường giữa 2 bên gửi-nhận được **dành riêng (dedicated)** cho nhau trong suốt phiên kết nối.
+
 - **Ưu điểm**: Cam kết hiệu năng cố định (băng thông, độ trễ ổn định), phù hợp cho mạng điện thoại truyền thống (PSTN).
+
 - **Nhược điểm**: Lãng phí tài nguyên khổng lồ khi các bên im lặng, quá trình thiết lập kênh tốn thời gian.
+
 - **Phương pháp phân chia kênh (FDM & TDM)**:
+
   - `FDM (Frequency-Division Multiplexing - Ghép kênh theo tần số)`: Dải tần số truyền dẫn (quang, điện từ) được chia thành nhiều dải tần hẹp (*narrow frequency bands*). Mỗi cuộc gọi được phân bổ một dải tần riêng và có thể truyền liên tục theo thời gian trong dải tần đó.
     ```text
     4 Users đại diện:  [U1: User 1]   [U2: User 2]   [U3: User 3]   [U4: User 4]
@@ -229,7 +280,9 @@ Tài nguyên mạng (băng thông, khe thời gian) dọc theo tuyến đường
 
 ### B. Packet Switching (Chuyển mạch gói)
 Dữ liệu được chia thành các gói nhỏ (**Packets**). Các gói tin di chuyển độc lập qua mạng và dùng chung đường truyền theo nhu cầu.
+
 - **Cơ chế Lưu trữ và Chuyển tiếp (Store-and-Forward)**: Toàn bộ gói tin phải đến router trọn vẹn và được kiểm tra tính toàn vẹn trước khi router bắt đầu truyền bit đầu tiên ra cổng xuất.
+
 - **Hàng đợi & Xung đột (Queuing Delay & Loss)**: Nếu tốc độ đến của các gói vượt quá dung lượng kênh ra, gói tin phải đứng chờ trong bộ đệm (*buffer*). Khi buffer đầy, các gói đến sau sẽ bị **loại bỏ (Drop / Packet Loss)**.
 
 ```text
@@ -281,39 +334,57 @@ Packet ──>│ [2] d_queue: Xếp hàng │                          │     
 ```
 
 1. **Trễ xử lý ($d_{proc}$ - Processing Delay)**: Thời gian đọc tiêu đề gói tin, kiểm tra lỗi bit (checksum/CRC), tra bảng định tuyến để tìm cổng ra. Thường tính bằng microsecond ($\mu s$).
+
 2. **Trễ xếp hàng ($d_{queue}$ - Queuing Delay)**: Thời gian gói tin nằm chờ trong hàng đợi để cổng xuất rảnh.
+
    - Định nghĩa cường độ lưu lượng: $I = \frac{L \cdot a}{R}$
+
    - Trong đó: $L$ = kích thước gói (bits), $a$ = tốc độ gói đến trung bình (packets/s), $R$ = tốc độ đường truyền (bps).
 
 > [!IMPORTANT]
 > **Ý nghĩa của Cường độ lưu lượng ($I = \frac{L \cdot a}{R}$)**:
+>
 > - **$I \approx 0$**: Hàng đợi gần như trống, độ trễ xếp hàng $d_{queue} \approx 0$.
+>
 > - **$I \to 1$**: Hàng đợi phình to, $d_{queue}$ tăng rất nhanh theo hàm tiệm cận.
+>
 > - **$I > 1$**: Lưu lượng đến nhanh hơn năng lực xử lý, hàng đợi tràn (*Buffer Overflow*), gói tin bị **drop**.
 
 3. **Trễ truyền dẫn ($d_{trans}$ - Transmission Delay)**: Thời gian cần thiết để đẩy toàn bộ các bit của gói tin lên đường truyền vật lý.
+
    - Công thức tính:
      $$d_{trans} = \frac{L}{R}$$
+
    - Trong đó:
+
      - $L$: Dung lượng của gói tin (đo bằng bits).
+
      - $R$: Băng thông / tốc độ phát của liên kết (đo bằng bps hoặc bits/s).
 
 4. **Trễ lan truyền ($d_{prop}$ - Propagation Delay)**: Thời gian cần thiết để 1 bit di chuyển từ đầu dây truyền dẫn sang đầu bên kia trong môi trường vật lý.
+
    - Công thức tính:
      $$d_{prop} = \frac{d}{s}$$
+
    - Trong đó:
+
      - $d$: Khoảng cách vật lý giữa hai nút mạng (đo bằng meters).
+
      - $s$: Vận tốc lan truyền tín hiệu trong môi trường dẫn ($s \approx 2 \times 10^8 \text{ m/s}$ trong cáp, xấp xỉ tốc độ ánh sáng).
 
 > [!TIP]
 > **Phân biệt trực quan $d_{trans}$ và $d_{prop}$ (Hãy tưởng tượng trạm thu phí):**
+>
 > - **$d_{trans}$** ví như thời gian đoàn xe đi qua cổng soát vé (xe to hay nhỏ, trạm soát nhanh hay chậm $\rightarrow$ phụ thuộc dung lượng $L$ và tốc độ $R$).
+>
 > - **$d_{prop}$** ví như thời gian chiếc xe sau khi qua trạm di chuyển từ trạm thu phí A sang trạm thu phí B trên đường cao tốc (phụ thuộc chiều dài quãng đường $d$ và tốc độ xe chạy $s$, hoàn toàn không phụ thuộc xe to hay nhỏ).
 
 ---
 
 ## 1.5. Thông lượng (Throughput) & Nút thắt cổ chai (Bottleneck)
+
 - **Throughput**: Tốc độ thực tế truyền tải dữ liệu thành công từ máy gửi tới máy nhận tại một thời điểm (đo bằng bps, Mbps).
+
 - **Bottleneck Link**: Đường truyền có dung lượng truyền tải nhỏ nhất trên toàn bộ hành trình end-to-end. Throughput thực tế không thể vượt quá dung lượng của liên kết cổ chai này.
 
 ```text
@@ -350,6 +421,7 @@ SO SÁNH MÔ HÌNH TCP/IP 5 TẦNG VÀ OSI 7 TẦNG
 ```
 
 - **Tầng Presentation (OSI)**: Định dạng dữ liệu, nén dữ liệu, mã hóa dữ liệu. Trong TCP/IP, công việc này do chính ứng dụng đảm nhận.
+
 - **Tầng Session (OSI)**: Đồng bộ hóa, thiết lập điểm kiểm tra (*checkpoints*) và phục hồi phiên trao đổi dữ liệu.
 
 ---
@@ -362,12 +434,19 @@ SO SÁNH MÔ HÌNH TCP/IP 5 TẦNG VÀ OSI 7 TẦNG
 Tầng ứng dụng là nơi các lập trình viên triển khai phần mềm mạng chạy trên các hệ thống đầu cuối (*End Systems*). Thiết bị mạng lõi (Router, Switch) hoàn toàn không can thiệp vào tầng này.
 
 ### Mô hình triển khai:
+
 1. **Client-Server Architecture**:
+
    - **Server**: Máy chủ luôn bật (*always-on*), có địa chỉ IP cố định, tài nguyên lớn (thường đặt trong các Data Center).
+
    - **Client**: Thiết bị người dùng, kết nối ngắt quãng, địa chỉ IP động, **không giao tiếp trực tiếp với nhau**.
+
 2. **Peer-to-Peer (P2P) Architecture**:
+
    - Gần như không phụ thuộc vào máy chủ trung tâm.
+
    - Các cặp nút mạng bình đẳng (*peers*) giao tiếp trực tiếp và chia sẻ tài nguyên cho nhau (ví dụ: BitTorrent).
+
    - **Khả năng tự mở rộng (Self-scalability)**: Càng nhiều peer tham gia tải đồng thời thì năng lực cung cấp dữ liệu của toàn mạng càng tăng.
 
 ### Giao diện Lập trình Socket:
@@ -448,10 +527,15 @@ CẤU TRÚC HOÀN CHỈNH CỦA MỘT ĐỊA CHỈ URL
 ```
 
 - **Protocol (Giao thức / Scheme)**: Xác định phương thức giao tiếp để lấy tài nguyên (`http`, `https`, `ftp`, `file`).
+
 - **Host Name (Tên miền hoặc Địa chỉ IP)**: Chỉ định máy chủ đích lưu trữ tài nguyên trên Internet (ví dụ: tên miền `api.example.com` hoặc IP `192.168.1.1`).
+
 - **Port (Cổng kết nối)**: Cổng do ứng dụng web lắng nghe trên server (mặc định HTTP là `80`, HTTPS là `443`; nếu dùng cổng mặc định thì trình duyệt tự động ẩn đi).
+
 - **Path Name (Đường dẫn tài nguyên)**: Đường dẫn phân cấp thư mục tới file hoặc API endpoint trên máy chủ, luôn bắt đầu bằng dấu `/` (ví dụ: `/v1/users/info`).
+
 - **Query String (Chuỗi truy vấn)**: Bắt đầu sau dấu `?`, chứa các cặp dữ liệu `key=value` nối nhau bởi dấu `&`, dùng để truyền tham số lọc, phân trang, tìm kiếm cho server (ví dụ: `?id=102&format=json`).
+
 - **Anchor / Fragment (Vị trí neo)**: Bắt đầu sau dấu `#`, chỉ định vị trí thẻ đánh dấu bên trong trang web để trình duyệt tự động cuộn màn hình đến đó ngay sau khi tải xong (ví dụ: `#profile`).
 
 ---
@@ -473,7 +557,9 @@ Sau khi nhận được HTTP Request từ Client, Server luôn gửi về một 
 Bản chất của giao thức HTTP là **không lưu trạng thái (Stateless)**: Server không ghi nhớ bất kỳ điều gì về các yêu cầu trước đó của client. Để duy trì trạng thái làm việc (phiên đăng nhập tài khoản, giỏ hàng thương mại điện tử, tùy chọn cá nhân), HTTP sử dụng **Cookies**:
 
 1. Khi client đăng nhập thành công, server tạo SessionID trong cơ sở dữ liệu và gửi header phản hồi: `Set-Cookie: id=789`
+
 2. Trình duyệt client tự động lưu cookie này vào bộ nhớ an toàn trên máy.
+
 3. Ở tất cả các request tiếp theo tới cùng website, trình duyệt tự động đính kèm header: `Cookie: id=789` để server nhận diện danh tính.
 
 ```text
@@ -494,12 +580,19 @@ CƠ CHẾ HOẠT ĐỘNG CỦA COOKIE & DUY TRÌ TRẠNG THÁI
 ```
 
 #### Phân biệt First-party Cookies vs Third-party Cookies:
+
 - **First-party Cookies (Cookie bên thứ nhất)**:
+
   - Được tạo ra và sở hữu trực tiếp bởi **chính domain của trang web mà người dùng đang truy cập** (ví dụ: bạn lướt web trên `shopee.vn`, cookie được cấp bởi `shopee.vn`).
+
   - *Mục đích sử dụng:* Phục vụ các tính năng tiện ích cốt lõi và hoàn toàn hợp pháp của trang web như: giữ phiên đăng nhập không bị văng ra ngoài, lưu sản phẩm trong giỏ hàng, ghi nhớ ngôn ngữ hay những cài đặt ta đã chỉnh.
+
 - **Third-party Cookies (Cookie bên thứ ba)**:
+
   - Được tạo ra bởi **một tên miền khác hoàn toàn với trang web bạn đang xem**. Chúng được cài cắm ngầm thông qua các banner quảng cáo, đoạn mã script phân tích (*Google Analytics*), nút like mạng xã hội hoặc "pixel theo dõi" (*Tracking Pixel* như `doubleclick.net`, `facebook.com`) được nhúng trên trang web đó.
+
   - *Mục đích sử dụng:* Theo dõi lịch sử và hành vi duyệt web của người dùng xuyên suốt hàng trăm website khác nhau để xây dựng hồ sơ sở thích cá nhân, từ đó phân phối các quảng cáo bám đuổi mục tiêu.
+
   - *Vấn đề an toàn & quyền riêng tư:* Gây lo ngại nghiêm trọng về lộ thông tin cá nhân và bị giám sát hành vi. Do đó, các trình duyệt hiện đại (Safari, Firefox, Chrome) hiện nay đã và đang tiến tới việc **chặn mặc định toàn bộ** Third-party cookies.
 
 ---
@@ -525,14 +618,21 @@ KIẾN TRÚC MÁY CHỦ ĐỆM WEB (WEB CACHE / PROXY SERVER)
 ```
 
 #### 2. Nguyên lý hoạt động (Cache Hit vs Cache Miss):
+
 1. Khi người dùng nhập địa chỉ web, trình duyệt gửi HTTP Request tới **Web Cache** trước tiên thay vì gửi thẳng ra Internet.
+
 2. Web Cache kiểm tra kho dữ liệu của mình:
+
    - **Cache Hit (Trúng bộ nhớ đệm)**: Nếu Web Cache đã có sẵn bản sao của file và bản sao đó vẫn còn mới (*Fresh*), Web Cache lập tức gửi trả file đó về cho Client qua mạng LAN tốc độ cao. Gói tin **hoàn toàn không cần đi ra Internet**.
+
    - **Cache Miss (Trượt bộ nhớ đệm)**: Nếu chưa có file hoặc file đã quá cũ, Web Cache sẽ đóng vai trò như một Client, tự động thay mặt người dùng gửi HTTP Request lên Origin Server trên Internet để tải file gốc về. Sau đó, Web Cache lưu một bản sao vào bộ nhớ đệm của mình rồi mới chuyển tiếp cho Client.
 
 #### 3. Lợi ích của Web Cache:
+
 1. **Giảm thiểu thời gian phản hồi (*Response Time*)**: Người dùng tải trang web từ máy chủ Cache trong mạng LAN nội bộ (tốc độ Gigabit, độ trễ vài mili-giây) nhanh hơn hàng chục lần so với việc phải kéo dữ liệu từ máy chủ gốc đặt ở nửa bên kia quả địa cầu.
+
 2. **Tiết kiệm băng thông ra ngoài Internet (*Bandwidth Saving*)**: Nếu 1.000 sinh viên cùng mở một video bài giảng, Web Cache chỉ cần tải video đó từ Internet đúng **1 lần duy nhất**, 999 sinh viên còn lại tải nội bộ đường truyền Internet của trường học không bị tắc nghẽn.
+
 3. **Giảm tải áp lực cho Server gốc**: Giúp máy chủ của các công ty lớn không bị quá tải khi có lượng truy cập đột biến.
 
 #### 4. Vấn đề đồng bộ dữ liệu: Cơ chế Conditional GET
@@ -574,15 +674,25 @@ UDP Conn  : [ Stream 1 (độc lập) ]  [ Stream 2 (độc lập) ]  [ Stream 3
 ```
 
 - **HTTP/1.0**: Mở kết nối TCP riêng biệt cho từng đối tượng (Non-persistent). Tốn $2\text{ RTT}$ cho mỗi file ảnh/css.
+
 - **HTTP/1.1**: **Persistent Connection** (giữ kết nối TCP mở để tải nhiều đối tượng liên tiếp). Hỗ trợ pipelining nhưng vẫn mắc lỗi **Head-of-Line Blocking** ở tầng ứng dụng (nếu tài nguyên đầu tiên xử lý chậm thì các tài nguyên phía sau bị nghẽn).
+
 - **HTTP/2 (RFC 7540)**:
+
   - Chuyển sang định dạng **Binary Framing** thay vì văn bản thuần.
+
   - **Multiplexing**: Ghép nhiều luồng dữ liệu (Streams) chạy đồng thời trên duy nhất một kết nối TCP.
+
   - **Header Compression (HPACK)**: Nén tiêu đề request/response để tiết kiệm băng thông.
+
   - **Server Push**: Chủ động gửi kèm CSS/JS trước khi client kịp gửi yêu cầu.
+
 - **HTTP/3 (RFC 9114)**:
+
   - Thay thế TCP bằng giao thức **QUIC** chạy trên nền **UDP**.
+
   - Giải quyết triệt để lỗi **TCP Head-of-Line Blocking**: Khi một gói UDP bị mất, chỉ luồng dữ liệu chứa gói đó bị dừng chờ truyền lại, các luồng độc lập khác vẫn hoạt động bình thường.
+
   - Tích hợp sẵn cơ chế đàm phán kết nối nhanh (0-RTT hoặc 1-RTT Connection Establishment).
 
 > [!TIP]
@@ -628,9 +738,13 @@ CÂY PHÂN CẤP 4 TẦNG HỆ THỐNG MÁY CHỦ DNS
 ```
 
 ### Các loại máy chủ DNS:
+
 1. **Root DNS Servers**: Máy chủ gốc quản lý toàn cầu (13 cụm IP logic do ICANN quản lý).
+
 2. **Top-Level Domain (TLD) Servers**: Quản lý các đuôi tên miền cấp 1 (`.com`, `.net`, `.org`, `.gov`, `.vn`).
+
 3. **Authoritative DNS Servers**: Máy chủ có thẩm quyền chính thức của các tổ chức, nắm giữ bản ghi IP chuẩn xác của tổ chức đó.
+
 4. **Local DNS Server (Resolving Name Server)**: Máy chủ DNS cục bộ (như `8.8.8.8` của Google, `1.1.1.1` của Cloudflare, hoặc DNS của ISP). Tiếp nhận truy vấn từ người dùng và đi lùng sục khắp cây phân cấp DNS để tìm kết quả.
 
 ### Truy vấn Đệ quy (Recursive) vs Truy vấn Lặp (Iterative):
@@ -660,25 +774,36 @@ QUÁ TRÌNH TRUY VẤN DNS ITERATIVE (LẶP)
 
 ### Các loại bản ghi DNS tài nguyên (Resource Records - RR):
 Cấu trúc bản ghi: `(Name, Value, Type, TTL (Time-To-Live))`
+
 - **Type A**: Name là Hostname, Value là địa chỉ IPv4 (vd: `google.com` $\to$ `142.250.190.46`).
+
 - **Type AAAA**: Phiên dịch sang địa chỉ IPv6.
+
 - **Type CNAME**: Tên miền bí danh trỏ về tên miền chuẩn Canonical Name (vd: `mail.google.com` $\to$ `ghs.google.com`).
+
 - **Type NS**: Trỏ tới tên máy chủ Authoritative chịu trách nhiệm quản lý tên miền (vd: `google.com` $\to$ `ns1.google.com`).
+
 - **Type MX**: Tên máy chủ xử lý thư điện tử (Mail Server) của miền.
+
 - **Type TXT**: Dữ liệu văn bản tùy biến.
 
 ---
 
 ## 2.4. Giao thức Email: SMTP, IMAP và POP3
+
 - **SMTP (Simple Mail Transfer Protocol - RFC 5321 - Port 25/587)**: Giao thức đẩy thư (*Push protocol*). Được dùng để gửi thư từ Client lên Mail Server và trung chuyển thư giữa các Mail Server với nhau.
+
 - **POP3 (Post Office Protocol v3 - Port 110/995)**: Giao thức kéo (*Pull protocol*). Tải toàn bộ thư về máy cục bộ và mặc định xóa thư trên server, không đồng bộ được trạng thái đọc giữa nhiều thiết bị.
+
 - **IMAP (Internet Message Access Protocol - RFC 3501 - Port 143/993)**: Lưu trữ và đồng bộ hóa thư trực tiếp trên server, cho phép quản lý thư mục, cờ đánh dấu từ nhiều thiết bị đồng thời.
 
 ---
 
 ## 2.5. Lập trình Socket cơ bản (Socket API)
 Socket cung cấp giao diện lập trình để các tiến trình trao đổi dữ liệu:
+
 - **TCP Socket (Stream Socket - SOCK_STREAM)**: Hướng kết nối, đảm bảo dữ liệu truyền đến nơi đúng thứ tự và nguyên vẹn.
+
 - **UDP Socket (Datagram Socket - SOCK_DGRAM)**: Không kết nối, truyền các gói tin độc lập với độ trễ tối thiểu.
 
 ```text
@@ -730,7 +855,9 @@ SO SÁNH TẦNG MẠNG VÀ TẦNG GIAO VẬN
 ```
 
 - **Tầng Network (Tầng Mạng)**: Chịu trách nhiệm vận chuyển gói tin từ **máy trạm này đến máy trạm kia** (*Host-to-Host*) dựa trên địa chỉ IP.
+
 - **Tầng Transport (Tầng Giao vận)**: Thiết lập kênh truyền thông logic trực tiếp giữa các **tiến trình ứng dụng cụ thể** đang chạy trên các máy tính (*Process-to-Process*) thông qua số hiệu cổng **Port Number**.
+
 - **Khái niệm Segment**: Là đơn vị dữ liệu (PDU) của tầng giao vận. Khi ứng dụng đẩy thông điệp (*Message*) lớn vào Socket, tầng giao vận sẽ băm nhỏ thông điệp thành các mảnh (*chunks*), gắn thêm tiêu đề giao vận (chứa `Source Port`, `Dest Port`, `Checksum`,...) để tạo thành Segment rồi đẩy xuống tầng mạng.
 
 ---
@@ -790,16 +917,22 @@ CƠ CHẾ DỒN KÊNH (MULTIPLEXING) VÀ PHÂN KÊNH (DEMULTIPLEXING)
 ```
 
 1. **Dồn kênh (Multiplexing) tại bên gửi**: Tầng giao vận thu thập dữ liệu từ nhiều socket ứng dụng khác nhau, bọc thêm tiêu đề tầng giao vận có chứa cổng nguồn (*Source Port*) và cổng đích (*Dest Port*) để tạo thành các segment, sau đó xếp xen kẽ và chuyển xuống tầng mạng.
+
 2. **Phân kênh (Demultiplexing) tại bên nhận**: Khi nhận segment từ tầng mạng đưa lên, tầng giao vận đọc trường `Destination Port` trong header để bàn giao dữ liệu vào đúng socket của tiến trình ứng dụng đang chờ.
+
    - **Phân kênh không kết nối (UDP)**: Socket đích chỉ được xác định dựa trên bộ đôi: `(Dest IP, Dest Port)`. Bất kỳ client nào gửi đến cùng một Dest Port đều chui vào chung một socket UDP.
+
    - **Phân kênh hướng kết nối (TCP)**: Mỗi socket kết nối TCP được định danh duy nhất bởi **bộ tứ 4-tuple**: `(Source IP, Source Port, Dest IP, Dest Port)`. Máy chủ web có thể lắng nghe ở cổng 80 nhưng sẽ tạo ra các socket riêng biệt cho từng client kết nối tới.
 
 ---
 
 ### Cấu trúc 3 dải cổng mạng (Port Numbers) do OS quản lý:
 Cổng (*Port*) là số nguyên 16-bit không âm, có giá trị từ $0$ đến $65535$ ($2^{16} - 1$):
+
 - **Well-known Ports ($0 - 1023$)**: Cổng mặc định dành riêng cho các dịch vụ mạng chuẩn quốc tế (HTTP `80`, HTTPS `443`, SSH `22`, DNS `53`, SMTP `25`). Hệ điều hành yêu cầu quyền quản trị cao nhất (*Root/Administrator*) mới cho phép tiến trình mở socket lắng nghe trên dải cổng này.
+
 - **Registered Ports ($1024 - 49151$)**: Dành cho các ứng dụng, dịch vụ phổ biến của các tổ chức/cá nhân đăng ký với IANA (MySQL `3306`, PostgreSQL `5432`, Microsoft RDP `3389`, MongoDB `27017`).
+
 - **Dynamic / Private / Ephemeral Ports ($49152 - 65535$)**: Cổng động do Hệ điều hành tự động cấp phát ngẫu nhiên cho các ứng dụng Client khi khởi tạo kết nối ra ngoài, và tự động thu hồi khi phiên kết nối kết thúc.
 
 ---
@@ -890,6 +1023,7 @@ Sender  : Chỉ hết giờ Timer của riêng gói 2 ──> CHỈ PHÁT LẠI 
 > $$W_{sender} + W_{receiver} \le 2^k \implies W \le 2^{k-1}$$
 >
 > - **$k$**: Số lượng bit dùng để đánh số Sequence Number trong tiêu đề gói tin.
+>
 > - **$W$**: Kích thước tối đa của cửa sổ trượt (phải thỏa mãn $W \le 2^{k-1}$, tức không vượt quá một nửa không gian số thứ tự).
 
 ---
@@ -910,10 +1044,15 @@ CẤU TRÚC GÓI UDP (8 BYTES HEADER)
 │          Application Data (Payload)         │
 └─────────────────────────────────────────────┘
 ```
+
 - **Source Port (16 bits)**: Cổng của tiến trình gửi.
+
 - **Dest Port (16 bits)**: Cổng của tiến trình nhận.
+
 - **Length (16 bits)**: Độ dài toàn bộ gói tin UDP (tính bằng bytes, gồm 8 bytes header + kích thước dữ liệu payload).
+
 - **Checksum (16 bits)**: Phát hiện lỗi bit trên đường truyền.
+
   - *Thuật toán Checksum*: Bên gửi cộng dồn các từ nhị phân 16-bit của toàn bộ gói tin (kèm một pseudo-header IP giả lập), lấy bù 1 (*1's Complement Sum*) rồi ghi vào ô Checksum. Bên nhận cộng dồn tất cả lại: nếu kết quả toàn bit 1 (`1111...1111`) nghĩa là gói tin nguyên vẹn; nếu xuất hiện bit 0 thì gói tin đã bị lỗi và bị loại bỏ ngay lập tức (UDP không gửi cảnh báo hay đòi phát lại).
 
 ---
@@ -942,19 +1081,33 @@ CẤU TRÚC CHI TIẾT TCP HEADER (20 - 60 BYTES)
 ```
 
 - **Source Port / Dest Port (16 bits mỗi trường)**: Cổng tiến trình gửi và cổng tiến trình nhận.
+
 - **Sequence Number (Seq - 32 bits)**: Đếm theo **số thứ tự của byte dữ liệu đầu tiên** trong payload của segment đó (chứ không đếm theo số thứ tự của gói tin).
+
 - **Acknowledgement Number (ACK - 32 bits)**: Chứa số thứ tự của **byte tiếp theo mà bên nhận đang mong đợi** nhận được (Cumulative ACK).
+
 - **Header Length (HLen / Data Offset - 4 bits)**: Độ dài của header TCP tính theo số từ 32-bit (4 bytes). Header tối thiểu là 20 bytes ($\text{HLen} = 5$, tương ứng $5 \times 4 = 20\text{ bytes}$).
+
 - **Tập hợp cờ điều khiển (Control Flags - 1 bit mỗi cờ)**:
+
   - `SYN (Synchronize)`: Dùng trong bước bắt tay để đồng bộ hóa số Seq khởi tạo ban đầu (*ISN*).
+
   - `ACK (Acknowledge)`: Thông báo trường Acknowledgement Number có giá trị hiệu lực.
+
   - `FIN (Finish)`: Bên gửi thông báo đã hết dữ liệu, yêu cầu đóng chiều gửi kết nối an toàn.
+
   - `RST (Reset)`: Hủy bỏ kết nối ngay lập tức vì phát hiện lỗi nghiêm trọng hoặc không có socket đích tương ứng.
+
   - `PSH (Push)`: Yêu cầu bên nhận đẩy ngay dữ liệu lên ứng dụng, không chờ gom đủ buffer.
+
   - `URG (Urgent)`: Báo hiệu segment chứa dữ liệu khẩn cấp.
+
   - `ECE / CWR`: Dùng cho cơ chế thông báo tắc nghẽn rõ ràng (*Explicit Congestion Notification - ECN*).
+
 - **Receive Window (16 bits)**: Biến `rwnd` dùng để kiểm soát luồng, thông báo số byte bộ đệm còn trống của bên nhận.
+
 - **Checksum (16 bits)**: Kiểm tra lỗi bit trên toàn bộ header và dữ liệu.
+
 - **Urgent Data Pointer (16 bits)**: Trỏ tới vị trí kết thúc của dữ liệu khẩn cấp khi cờ URG được bật.
 
 ---
@@ -989,14 +1142,19 @@ QUÁ TRÌNH THIẾT LẬP (3-WAY) VÀ ĐÓNG (4-WAY) KẾT NỐI TCP
 
 > [!NOTE]
 > **Tại sao Client phải chờ ở trạng thái TIME_WAIT (2 * MSL = 60 - 120 giây) trước khi đóng hẳn?**
+>
 > - **Khái niệm MSL (Maximum Segment Lifetime)**: Là thời gian sống tối đa mà một TCP segment có thể tồn tại trên mạng Internet trước khi bị hủy bỏ (thường mặc định là 30 đến 60 giây tùy hệ điều hành).
+>
 > 1. **Bảo đảm bên đối diện nhận được ACK**: Nếu gói ACK cuối (bước 4) bị rớt, Server sẽ timeout và gửi lại gói FIN (bước 3). Khoảng chờ 2 * MSL (1 MSL cho gói ACK đi + 1 MSL cho gói FIN gửi lại quay về) giúp Client vẫn còn mở để gửi lại ACK, tránh việc đóng sớm khiến Client phản hồi gói RST gây lỗi bất thường cho Server.
+>
 > 2. **Dọn sạch các gói tin cũ trên mạng**: Đảm bảo toàn bộ các gói tin cũ của kết nối này hết hạn TTL (Time-To-Live) và chết hẳn, tránh gây nhiễu loạn cho một kết nối mới mở sau đó mà vô tình dùng trùng số cổng Port.
 
 ---
 
 ### C. Cơ chế Kiểm soát luồng (Flow Control)
+
 - **Mục đích**: Bảo vệ bộ đệm của **Bên nhận (Receiver)** không bị tràn do bên gửi truyền dữ liệu quá nhanh (tốc độ mạng nhanh hơn tốc độ ứng dụng đọc dữ liệu từ Socket).
+
 - **Cơ chế hoạt động**: Hoàn toàn tự động do Hệ điều hành thực hiện. Bên nhận liên tục tính toán khoảng không gian bộ nhớ còn trống của mình và ghi vào trường `Receive Window (rwnd)` gửi kèm trong mọi gói tin phản hồi về bên gửi:
 
 ```text
@@ -1027,8 +1185,11 @@ CƠ CHẾ BỘ ĐỆM BÊN NHẬN VÀ TÍNH TOÁN RECEIVE WINDOW (rwnd)
 ---
 
 ### D. Cơ chế Kiểm soát tắc nghẽn (Congestion Control)
+
 - **Mục đích**: Bảo vệ **Hạ tầng mạng lõi (Network Core - các Router dọc đường)** không bị tràn hàng đợi gây rớt gói hàng loạt.
+
 - Hoạt động dựa trên biến cửa sổ tắc nghẽn `cwnd (Congestion Window)` do bên gửi tự tính toán và điều chỉnh.
+
 - Lượng dữ liệu tối đa bên gửi được phép bơm vào mạng luôn bị khống chế bởi cả hai yếu tố:
 
   $$\text{Cửa sổ gửi tối đa} = \min(\text{cwnd}, \text{rwnd})$$
@@ -1069,11 +1230,17 @@ QUY TẮC HOẠT ĐỘNG VÀ ĐIỀU CHỈNH BIẾN SSTHRESH:
 ```
 
 1. **Slow Start (Khởi động chậm)**: Khởi tạo với $\text{cwnd} = 1\text{ MSS}$. Cứ mỗi lượt nhận đủ ACK trong 1 RTT, $\text{cwnd}$ tăng gấp đôi (tăng theo hàm mũ: $1 \to 2 \to 4 \to 8 \dots$).
+
 2. **Congestion Avoidance (Tránh tắc nghẽn)**: Khi $\text{cwnd} \ge \text{ssthresh}$ (Slow Start Threshold), chuyển sang tăng tuyến tính: mỗi RTT chỉ cộng thêm đúng $1\text{ MSS}$ để thăm dò an toàn.
+
 3. **Phản ứng khi xảy ra sự cố**:
+
    - **Tắc nghẽn nhẹ (Nhận được 3 gói Duplicate ACKs)**: Báo hiệu mạng vẫn còn chuyển tiếp được gói tin.
+
      - `TCP Tahoe`: Đặt $\text{cwnd} = 1\text{ MSS}$, đưa về Slow Start.
+
      - `TCP Reno`: Fast Recovery $\to \text{ssthresh} = \frac{\text{cwnd}}{2}$ (trong sơ đồ: $\frac{16}{2} = 8\text{ MSS}$), đặt $\text{cwnd} = \text{ssthresh} + 3$, tiếp tục tăng tuyến tính $+1\text{ MSS}/\text{RTT}$ (tạo đồ thị răng cưa kinh điển).
+
    - **Tắc nghẽn nặng (Timeout)**: Router dọc đường đã nghẽn cứng hoặc đứt cáp. Cả Reno và Tahoe đều đặt $\text{ssthresh} = \frac{\text{cwnd}}{2}$ (trong sơ đồ: $\frac{14}{2} = 7\text{ MSS}$) và đạp $\text{cwnd}$ thẳng về $1\text{ MSS}$, khởi động lại từ Slow Start.
 
 ---
@@ -1106,12 +1273,19 @@ SO SÁNH ĐẶC TUYẾN TĂNG TRƯỞNG CỦA CÁC THUẬT TOÁN ĐIỀU KHIỂN
 ```
 
 - **TCP Reno (Cổ điển)**: Sử dụng mô hình AIMD răng cưa. Điểm yếu là tăng tốc rất chậm trên các đường truyền cáp quang băng thông lớn (*High-BDP Networks*).
+
 - **TCP CUBIC (Mặc định trên Linux, Windows, macOS, Android)**:
+
   - Sử dụng hàm số bậc 3 để điều chỉnh kích thước `cwnd`.
+
   - Sau sự cố rớt gói, CUBIC tăng vọt rất nhanh về mức băng thông tối ưu trước đó, sau đó giảm dần tốc độ tăng khi tiệm cận đỉnh cũ để thăm dò an toàn. Giúp tận dụng tối đa băng thông mà không gây sốc mạng.
+
 - **TCP BBR (Bottleneck Bandwidth and RTT - Phát minh bởi Google)**:
+
   - Khác biệt hoàn toàn với tư duy truyền thống: **Không sử dụng việc rớt gói tin để phát hiện tắc nghẽn**!
+
   - BBR liên tục đo đạc 2 thông số thực tế: **Băng thông tối đa tại nút thắt cổ chai (*Max Bottleneck Bandwidth*)** và **Thời gian trễ truyền hai chiều tối thiểu (*Min RTT - Round-Trip Time*)**.
+
   - BBR bơm dữ liệu vừa đủ để lấp đầy đường ống mà không làm tràn bộ đệm của Router, loại bỏ hoàn toàn hiện tượng nghẽn hàng đợi (*Bufferbloat*), cải thiện tốc độ mạng thực tế lên gấp nhiều lần.
 
 ---
@@ -1122,12 +1296,19 @@ SO SÁNH ĐẶC TUYẾN TĂNG TRƯỞNG CỦA CÁC THUẬT TOÁN ĐIỀU KHIỂN
 
 ## 4.1. Khái niệm Data Plane vs Control Plane
 Tầng mạng (Network Layer) chịu trách nhiệm vận chuyển gói tin từ máy gửi đến máy nhận xuyên qua toàn bộ các nút mạng trung gian (Host-to-Host communication).
+
 - **Datagram**: Đơn vị dữ liệu giao thức (PDU) của tầng mạng, là TCP/UDP Segment nhận từ Tầng Giao vận được đóng gói thêm IP Header.
+
 - **Mô hình dịch vụ "Best-effort" (Nỗ lực tối đa)**:
+
   - Tầng mạng của Internet chỉ cam kết *cố gắng hết sức* để chuyển gói tin tới đích, nhưng **hoàn toàn không bảo đảm**:
+
     - Không cam kết gói tin chắc chắn tới đích (có thể bị drop do tràn bộ đệm).
+
     - Không cam kết thứ tự gói tin (các gói có thể đến đích lộn xộn).
+
     - Không cam kết độ trễ tối đa hay băng thông tối thiểu.
+
   - Sự đơn giản của mô hình Best-effort giúp mạng lõi Internet cực kỳ linh hoạt, chi phí thiết bị rẻ và dễ mở rộng quy mô toàn cầu (mọi sự phức tạp về kiểm soát độ tin cậy được đẩy lên Tầng Giao vận TCP ở rìa mạng).
 
 ```text
@@ -1169,12 +1350,19 @@ KIẾN TRÚC PHẦN CỨNG BÊN TRONG MỘT ROUTER
 ```
 
 ### A. Cổng vào (Input Port):
+
 1. **Khối kết thúc đường truyền (Line Termination)**: Tiếp nhận tín hiệu vật lý (điện áp trên cáp đồng, xung ánh sáng trong sợi quang, sóng radio) và chuyển đổi thành dòng bit $0, 1$.
+
 2. **Khối tầng liên kết (Link Layer Processing)**: Bóc mở Ethernet frame, kiểm tra tính toàn vẹn của dữ liệu bằng mã CRC, bóc bỏ Header/Trailer tầng 2 để lấy IPv4/IPv6 Datagram.
+
 3. **Khối tra cứu địa chỉ (Lookup & Forwarding)**:
+
    - Đọc địa chỉ IP đích trong Datagram Header.
+
    - Tra cứu trong **Forwarding Table** bằng thuật toán **Longest Prefix Match (Khớp tiền tố dài nhất)** để xác định chính xác cổng ra cần chuyển tới.
+
    - Để đạt tốc độ xử lý hàng trăm triệu gói/giây, bảng Forwarding Table được nạp vào bộ nhớ chuyên biệt **TCAM (Ternary Content Addressable Memory)** cho phép tìm kiếm toàn bộ bảng chỉ trong 1 chu kỳ xung nhịp $O(1)$.
+
    - Nếu Switching Fabric đang bận, gói tin sẽ được đưa vào hàng đợi tạm tại Input Port.
 
 ### B. Băng chuyền chuyển mạch (Switching Fabric):
@@ -1200,6 +1388,7 @@ BA KIẾN TRÚC BĂNG CHUYỀN CHUYỂN MẠCH (SWITCHING FABRIC)
 ```
 
 - **Hiện tượng Head-of-the-Line (HOL) Blocking ở Input Port**:
+
   - Xảy ra khi gói tin đứng đầu hàng đợi ở Input 1 muốn chuyển ra Output 1 (đang bận vì một Input khác đang truyền tới), khiến tất cả các gói tin phía sau trong hàng đợi của Input 1 đều bị chặn đứng dù cổng ra của chúng (ví dụ Output 2) đang hoàn toàn rảnh rỗi.
 
 ```text
@@ -1212,13 +1401,21 @@ Input 2                            [ Gói tới Out 1 (ĐI)  ] ──┘
 
 ### C. Cổng ra (Output Port) & Lập lịch hàng đợi (Queue Scheduling):
 Khi tốc độ chuyển gói từ Switching Fabric tới cổng ra lớn hơn tốc độ truyền dẫn vật lý đẩy bit ra ngoài liên kết, gói tin sẽ dồn lại trong bộ đệm của Output Port:
+
 - **Nguy cơ tràn đệm (Buffer Overflow / Packet Loss)**: Khi bộ đệm đầy, router bắt buộc phải hủy gói tin. Chính sách hủy:
+
   - *Drop-tail*: Gói đến sau cùng khi hàng đầy sẽ bị vứt bỏ lập tức.
+
   - *RED (Random Early Detection)*: Khi hàng đợi vượt qua một ngưỡng dung lượng an toàn, router chủ động vứt bỏ ngẫu nhiên một tỷ lệ nhỏ gói tin để kích hoạt TCP của các bên gửi giảm tốc sớm, tránh sụp đổ mạng hàng loạt.
+
 - **Các thuật toán lập lịch hàng đợi (Packet Scheduling)**:
+
   1. **FCFS (First-Come First-Served / FIFO)**: Gói nào tới hàng đợi trước thì được truyền lên đường dây trước.
+
   2. **Priority Queuing (Ưu tiên)**: Phân gói tin vào các mức ưu tiên khác nhau (ví dụ: VoIP/Streaming ưu tiên cao, HTTP/Email ưu tiên thấp). Gói ưu tiên thấp chỉ được phát khi hàng đợi ưu tiên cao hoàn toàn trống.
+
   3. **Round Robin (Luân phiên)**: Chia thành nhiều hàng đợi theo từng lớp người dùng, luân phiên lấy 1 gói từ hàng đợi 1, rồi đến hàng đợi 2, hàng đợi 3... xoay vòng đều đặn.
+
   4. **Weighted Fair Queuing (WFQ - Công bằng có trọng số)**: Nâng cấp của Round Robin, mỗi hàng đợi được ấn định một trọng số $w_i$. Băng thông thực tế cấp cho luồng $i$ tỷ lệ thuận với trọng số, đảm bảo dịch vụ tối thiểu cho các luồng quan trọng khi mạng bị nghẽn nặng.
 
 ---
@@ -1248,29 +1445,48 @@ CẤU TRÚC GÓI IPV4 DATAGRAM HEADER
 ```
 
 - **Version (4 bits)**: Số hiệu phiên bản giao thức IP (IPv4 = `4` hay `0100`).
+
 - **IHL (Internet Header Length - 4 bits)**: Độ dài của Header tính theo khối 4-byte (32-bit words). Giá trị nhỏ nhất là `5` ($5 \times 4 = 20$ Bytes khi không có Options), tối đa là `15` ($15 \times 4 = 60$ Bytes).
+
 - **Type of Service (TOS) / DSCP + ECN (8 bits)**: Phân loại chất lượng dịch vụ (QoS) và ECN (Explicit Congestion Notification) báo hiệu tắc nghẽn sớm mà không cần drop gói.
+
 - **Total Length (16 bits)**: Tổng chiều dài toàn bộ gói tin (Header + Payload) tính theo byte. Tối đa $2^{16} - 1 = 65,535$ Bytes (nhưng hiếm khi vượt quá MTU 1500 Bytes).
+
 - **TTL (Time-To-Live - 8 bits)**: Mỗi khi gói đi qua một router (1 Hop), router giảm TTL đi 1. Khi $TTL = 0$, router lập tức hủy gói và gửi thông báo lỗi **ICMP Time Exceeded (Type 11, Code 0)** về máy gửi. Giúp triệt tiêu vĩnh viễn các gói tin bay vô tận trong vòng lặp định tuyến (*Routing Loop*).
+
 - **Protocol (8 bits)**: Định danh giao thức tầng trên nằm trong payload:
+
   - `1`: ICMP
+
   - `6`: TCP
+
   - `17`: UDP
+
   - `41`: IPv6 Encapsulation (Tunneling)
+
   - `89`: OSPF
+
 - **Header Checksum (16 bits)**: Mã kiểm tra lỗi áp dụng **chỉ cho phần Header** (bảo vệ địa chỉ nguồn/đích). Mỗi khi đi qua một router, vì TTL bị giảm 1 nên router phải **tính toán lại Header Checksum** trước khi chuyển tiếp.
 
 ---
 
 ### B. Cơ chế Phân mảnh và Tái ghép IPv4 (Fragmentation & Reassembly)
 Mỗi liên kết tầng liên kết dữ liệu (Data Link) có một giới hạn truyền tải tối đa gọi là **MTU (Maximum Transmission Unit)**. Ví dụ: Ethernet có MTU = 1500 Bytes.
+
 - Nếu kích thước Datagram lớn hơn MTU của đường truyền tiếp theo, Router bắt buộc phải bẻ gói tin ban đầu thành nhiều mảnh nhỏ (**Fragments**).
+
 - **Ba trường điều khiển phân mảnh trong Header**:
+
   - `Identification (ID - 16 bits)`: Định danh số hiệu của gói gốc. Tất cả các mảnh cắt ra từ cùng một gói đều mang cùng giá trị ID để bên nhận gom đúng nhóm.
+
   - `Flags (3 bits)`:
+
     - Bit 0: Reserved (luôn bằng 0).
+
     - Bit 1 - `DF (Don't Fragment)`: Nếu $DF = 1$, router bị cấm phân mảnh. Nếu gói vượt quá MTU, router hủy gói và gửi ICMP báo lỗi.
+
     - Bit 2 - `MF (More Fragments)`: Nếu $MF = 1$, báo hiệu phía sau vẫn còn mảnh tiếp theo. Mảnh cuối cùng sẽ có $MF = 0$.
+
   - `Fragment Offset (13 bits)`: Vị trí bắt đầu của dữ liệu mảnh này so với dữ liệu của gói gốc, tính theo **đơn vị khối 8-byte** (Offset = Vị trí byte bắt đầu / 8). Do đó, dữ liệu của mỗi mảnh (trừ mảnh cuối) phải luôn chia hết cho 8!
 
 ```text
@@ -1310,7 +1526,9 @@ Mảnh 3:        ┌────────────┬───────
 
 ### A. Cấu trúc địa chỉ IPv4 & Mặt nạ mạng (Subnet Mask)
 IPv4 gồm **32 bits**, biểu diễn dưới dạng 4 số thập phân ngăn cách bởi dấu chấm (Dotted-decimal notation, ví dụ: `192.168.1.100`).
+
 - Cấu trúc 2 phần: `[ Network Prefix (Phần mạng) ] [ Host ID (Phần máy) ]`
+
 - **Chuẩn CIDR (Classless Inter-Domain Routing - RFC 4632)**: Biểu diễn dạng `a.b.c.d/x`, trong đó `/x` là số lượng bit của phần Network Prefix (tương đương số bit 1 trong Subnet Mask).
 
 ```text
@@ -1326,10 +1544,15 @@ Số Host:     2^(32 - 24) - 2 = 2^8 - 2 = 254 địa chỉ khả dụng
 
 > [!TIP]
 > **Công thức vàng tính nhanh Subnetting**:
+>
 > - Tổng số địa chỉ IP trong mạng $/x$: $N = 2^{32 - x}$.
+>
 > - Số địa chỉ Host gán được cho thiết bị: $N - 2$ (trừ Network ID và Broadcast Address).
+>
 > - Bước nhảy (Block Size): $256 - \text{Giá trị Octet bị chia của Subnet Mask}$.
+>
 >   - Ví dụ: $/26 \implies$ Mask là `255.255.255.192` $\implies$ Bước nhảy = $256 - 192 = 64$.
+>
 >   - Các mạng con: `192.168.1.0/26`, `192.168.1.64/26`, `192.168.1.128/26`, `192.168.1.192/26`.
 
 ### B. Nguyên lý Khớp tiền tố dài nhất (Longest Prefix Match - LPM)
@@ -1354,10 +1577,15 @@ Gói tin 1 có IP đích: 200.23.24.50
 
 ### C. Bảng phân dải IP Private (RFC 1918)
 Được IANA bảo lưu riêng cho các mạng nội bộ. Mọi router trên mạng Internet công cộng đều được cấu hình để **drop ngay lập tức** các gói tin có IP đích là Private:
+
 - **Lớp A**: `10.0.0.0/8` (`10.0.0.0` $\to$ `10.255.255.255`) - Chứa $\approx 16.7$ triệu máy.
+
 - **Lớp B**: `172.16.0.0/12` (`172.16.0.0` $\to$ `172.31.255.255`) - Chứa $\approx 1$ triệu máy.
+
 - **Lớp C**: `192.168.0.0/16` (`192.168.0.0` $\to$ `192.168.255.255`) - Thường dùng cho gia đình, văn phòng nhỏ.
+
 - **Loopback Address**: `127.0.0.1/8` (Tự trỏ về chính máy mình mà không phát ra card mạng).
+
 - **APIPA (Automatic Private IP Addressing)**: `169.254.0.0/16` (Địa chỉ Windows tự gán khi không xin được IP từ DHCP Server).
 
 ---
@@ -1366,7 +1594,9 @@ Gói tin 1 có IP đích: 200.23.24.50
 
 ### A. Giao thức Cấu hình Động (DHCP - Dynamic Host Configuration Protocol - RFC 2131)
 Cơ chế "Plug-and-Play" cho phép thiết bị khi cắm dây mạng hoặc kết nối Wi-Fi tự động nhận đầy đủ 4 thông số mạng: Địa chỉ IP, Subnet Mask, Default Gateway (IP Router) và Local DNS Server.
+
 - Hoạt động trên tầng ứng dụng qua giao thức **UDP**: Cổng **Server là 67**, cổng **Client là 68**.
+
 - Quá trình xin cấp phát diễn ra qua **tiến trình DORA 4 bước**:
 
 ```text
@@ -1398,8 +1628,11 @@ QUÁ TRÌNH CẤP PHÁT ĐỊA CHỈ IP TỰ ĐỘNG DHCP (D-O-R-A)
 
 ### B. Network Address Translation (NAT / NAPT - RFC 3022)
 Do không gian địa chỉ IPv4 (32 bits $\approx 4.3$ tỷ địa chỉ) đã cạn kiệt, NAT ra đời như chiếc phao cứu sinh của Internet: Cho phép toàn bộ mạng nội bộ dùng hàng nghìn địa chỉ Private nhưng chỉ cần **duy nhất một địa chỉ IP Public** để truy cập Internet toàn cầu.
+
 - **Nguyên lý hoạt động (Port-level NAT / NAPT)**:
+
   - Khi gói tin từ LAN đi ra WAN: Router NAT thay thế `[Src IP Private, Src Port]` bằng `[IP Public của Router, Port WAN mới sinh]`, sau đó lưu ánh xạ này vào **NAT Translation Table**.
+
   - Khi gói tin phản hồi từ Server Internet gửi về: Router NAT tra cứu Port WAN trong NAT Table để tìm ra `[IP Private, Port LAN]` tương ứng của máy nội bộ và hoán đổi địa chỉ trước khi đẩy vào mạng LAN.
 
 ```text
@@ -1437,7 +1670,9 @@ Máy trạm: 192.168.1.10                           WAN IP: 203.0.113.1         
 
 > [!WARNING]
 > **Tranh cãi kỹ thuật về NAT**:
+>
 > - *Vi phạm nguyên lý End-to-End*: Router ở Tầng 3 lại can thiệp sửa đổi số Port ở Tầng 4.
+>
 > - *Khó khăn cho kết nối ngang hàng P2P*: Máy bên ngoài Internet không thể chủ động khởi tạo kết nối tới máy trạm nằm sau NAT (cần các giải pháp kỹ thuật phụ trợ như STUN, TURN, UPnP hoặc Port Forwarding).
 
 ---
@@ -1466,10 +1701,15 @@ CẤU TRÚC TIÊU ĐỀ IPV6
 ```
 
 - **Cải tiến vượt bậc so với IPv4**:
+
   1. **Kích thước Header cố định đúng 40 Bytes**: Router không cần trường Header Length (IHL) nữa, giúp các chip ASIC phần cứng xử lý gói tin với tốc độ ánh sáng.
+
   2. **Bỏ hoàn toàn trường Checksum**: Vì tầng Data Link (Ethernet CRC) và tầng Transport (TCP/UDP Checksum) đều đã có cơ chế kiểm tra lỗi. Việc bỏ Checksum giúp Router không phải tính toán lại mỗi khi giảm Hop Limit.
+
   3. **Bỏ cơ chế phân mảnh tại Router**: Router gặp gói vượt MTU sẽ lập tức drop và gửi thông điệp ICMPv6 "Packet Too Big" yêu cầu bên gửi tự thu nhỏ kích thước dữ liệu (*Path MTU Discovery*).
+
   4. **Flow Label (20 bits)**: Giúp nhận diện và ưu tiên luồng dữ liệu truyền theo chuỗi (ví dụ: real-time streaming) mà không cần phân tích sâu vào payload.
+
   5. **Bỏ hoàn toàn Broadcast**: Thay thế bằng **Multicast** và **Anycast** để tránh làm nghẽn toàn bộ mạng con.
 
 ### B. Bảng so sánh toàn diện IPv4 vs IPv6:
@@ -1486,7 +1726,9 @@ CẤU TRÚC TIÊU ĐỀ IPV6
 
 ### C. Cơ chế chuyển dịch từ IPv4 sang IPv6:
 Mạng Internet toàn cầu không thể chuyển đổi sang IPv6 trong một sớm một chiều:
+
 - **Dual-Stack (Chạy song song)**: Thiết bị mạng hỗ trợ đồng thời cả hai ngăn xếp IPv4 và IPv6, tùy máy đích dùng chuẩn nào sẽ gửi gói tin chuẩn đó.
+
 - **Tunneling (Đường hầm đóng gói)**: Khi hai nút IPv6 cần liên lạc với nhau qua mạng trung gian chỉ hỗ trợ IPv4, toàn bộ gói tin IPv6 sẽ được bọc vào trong phần Payload của một gói tin IPv4 bình thường.
 
 ```text
@@ -1503,6 +1745,7 @@ CƠ CHẾ ĐƯỜNG HẦM IPV6 TRUYỀN QUA MẠNG IPV4 (IPV6 TUNNELING)
 
 ## 4.7. Generalized Forwarding & OpenFlow (Kiến trúc SDN)
 Trong các mạng hiện đại định nghĩa bằng phần mềm SDN (Software-Defined Networking), khái niệm chuyển tiếp đã được tổng quát hóa thành cơ chế **Khớp và Thực thi (Match-plus-Action)** thông qua tiêu chuẩn **OpenFlow**:
+
 - Thay vì chỉ tra cứu địa chỉ IP đích như Router truyền thống, các Switch/Router OpenFlow duyệt qua các trường tiêu đề từ Tầng 2, Tầng 3 đến Tầng 4 trong một bảng luật gọi là **Flow Table**:
 
 ```text
@@ -1519,9 +1762,13 @@ CẤU TRÚC BẢNG DÒNG LỆNH OPENFLOW (FLOW TABLE ENTRY)
 ```
 
 - **Tính linh hoạt vượt bậc của Generalized Forwarding**:
+
   - Đóng vai trò **Router**: Match theo IP đích $\implies$ Action là Forward ra cổng kế tiếp.
+
   - Đóng vai trò **Switch Tầng 2**: Match theo MAC đích $\implies$ Action là Forward theo bảng CAM.
+
   - Đóng vai trò **Tường lửa (Firewall)**: Match theo IP/Port nguy hiểm $\implies$ Action là Drop.
+
   - Đóng vai trò **NAT**: Match theo IP/Port LAN $\implies$ Action là Modify Header và Forward.
 
 ---
@@ -1532,9 +1779,13 @@ CẤU TRÚC BẢNG DÒNG LỆNH OPENFLOW (FLOW TABLE ENTRY)
 
 ## 5.1. Kiến trúc Mặt phẳng Điều khiển SDN (Software-Defined Networking)
 Kiến trúc mang tính cách mạng: Tách rời hoàn toàn bộ não tính toán định tuyến (Control Plane) ra khỏi thiết bị chuyển mạch vật lý (Data Plane).
+
 - **1. Data Plane Devices**: Các switch phần cứng chỉ làm nhiệm vụ chuyển tiếp gói tin tốc độ cao theo bảng luật (*Flow Table*).
+
 - **2. SDN Controller (Network OS)**: Máy chủ trung tâm lưu trữ bản đồ trạng thái toàn mạng, cung cấp API hai đầu:
+
   - *Southbound API (ví dụ: OpenFlow)*: Đẩy bảng luật từ máy chủ xuống các switch vật lý.
+
   - *Northbound API (RESTful)*: Cho phép các ứng dụng định tuyến, cân bằng tải, tường lửa của bên thứ ba lập trình logic mạng một cách linh hoạt.
 
 ---
@@ -1559,11 +1810,17 @@ PHÂN LOẠI HAI TRƯỜNG PHÁI THUẬT TOÁN ĐỊNH TUYẾN KINH ĐIỂN
 ---
 
 ### A. Thuật toán Link-State (Dijkstra Algorithm)
+
 - **Nguyên lý**: Mỗi router thu thập trạng thái liên kết của toàn bộ các router trong mạng thông qua cơ chế phát tán gói tin **LSA Flooding (Link State Advertisement)**. Khi mọi router đều có cùng một bản đồ mạng (Topology Map), chúng sẽ chạy thuật toán Dijkstra để tìm cây đường đi ngắn nhất từ chính nó tới tất cả các nút khác.
+
 - **Ký hiệu toán học**:
+
   - $c(x, y)$: Chi phí liên kết trực tiếp giữa nút $x$ và nút $y$ (nếu không nối trực tiếp, $c = \infty$).
+
   - $D(v)$: Chi phí đường đi hiện tại ước tính từ nút nguồn tới nút $v$.
+
   - $p(v)$: Nút liền trước nút $v$ trên đường đi ngắn nhất hiện tại.
+
   - $N'$: Tập hợp các nút đã tìm được đường đi ngắn nhất dứt khoát.
 
 ```text
@@ -1587,25 +1844,45 @@ MÔ HÌNH MẠNG VÍ DỤ CHẠY DIJKSTRA TỪ NÚT NGUỒN (u)
 | **Bước 5** | $\{u, x, y, v, w, z\}$ | - | - | - | - | - | Hoàn tất (Đã duyệt đủ 6 nút) |
 
 **Chi tiết tính toán cập nhật từng bước:**
+
 - **Bước 0 (Khởi tạo)**: $N' = \{u\}$. Các nút lân cận trực tiếp của $u$ là $v$ ($c=2$) và $x$ ($c=1$). Các nút $w, y, z$ chưa kề nên có chi phí $\infty$. Nút $x$ có $D(x) = 1$ nhỏ nhất $\implies$ Đưa $x$ vào $N'$.
+
 - **Bước 1 (Xét nút $x$, $D(x)=1$)**: Cập nhật các nút kề với $x$ chưa thuộc $N'$:
+
   - $D(v) = \min(D(v), D(x) + c(x, v)) = \min(2, 1 + 2) = 2, p(v) = u$ (giữ nguyên).
+
   - $D(w) = \min(D(w), D(x) + c(x, w)) = \min(\infty, 1 + 3) = 4, p(w) = x$.
+
   - $D(y) = \min(D(y), D(x) + c(x, y)) = \min(\infty, 1 + 1) = 2, p(y) = x$.
+
   - $D(z) = \infty$ (không nối với $x$).
+
   - Cả $v$ và $y$ đều có chi phí nhỏ nhất bằng 2. Theo trình tự bài giảng chuẩn, ưu tiên chọn $y$ $\implies$ Đưa $y$ vào $N'$. *(Lưu ý: Nếu chọn $v$ trước thì các bước sau vẫn cho ra cây đường đi ngắn nhất hoàn toàn tương đương)*.
+
 - **Bước 2 (Xét nút $y$, $D(y)=2$)**: Cập nhật các nút kề với $y$ chưa thuộc $N'$:
+
   - $D(w) = \min(D(w), D(y) + c(y, w)) = \min(4, 2 + 1) = 3, p(w) = y$.
+
   - $D(z) = \min(D(z), D(y) + c(y, z)) = \min(\infty, 2 + 2) = 4, p(z) = y$.
+
   - $D(v)$ không đổi ($2, u$).
+
   - Trong các nút $\{v, w, z\}$, nút $v$ có chi phí nhỏ nhất ($D=2$) $\implies$ Đưa $v$ vào $N'$.
+
 - **Bước 3 (Xét nút $v$, $D(v)=2$)**: Cập nhật các nút kề với $v$ chưa thuộc $N'$:
+
   - $D(w) = \min(D(w), D(v) + c(v, w)) = \min(3, 2 + 3) = 3, p(w) = y$ (giữ nguyên vì $3 < 5$).
+
   - $D(z)$ không đổi ($4, y$).
+
   - Nút $w$ có chi phí nhỏ nhất ($D=3$) $\implies$ Đưa $w$ vào $N'$.
+
 - **Bước 4 (Xét nút $w$, $D(w)=3$)**: Cập nhật các nút kề với $w$ chưa thuộc $N'$:
+
   - $D(z) = \min(D(z), D(w) + c(w, z)) = \min(4, 3 + 5) = 4, p(z) = y$ (giữ nguyên vì $4 < 8$).
+
   - Nút $z$ là nút duy nhất còn lại ($D=4$) $\implies$ Đưa $z$ vào $N'$.
+
 - **Bước 5**: Tất cả các nút trong mạng đã được kết nạp vào $N'$. Thuật toán kết thúc!
 
 ```text
@@ -1629,20 +1906,27 @@ CÂY ĐƯỜNG ĐI NGẮN NHẤT (SHORTEST PATH TREE) THU ĐƯỢC TỪ NÚT (u)
 | $z$ | $(u, x)$ | $u \to x \to y \to z$ | 4 |
 
 - **Độ phức tạp**: $O(N^2)$, nếu sử dụng cấu trúc Min-Heap có thể tối ưu xuống $O(N \log N)$.
+
 - **Nguy cơ dao động tuyến (Routing Oscillations)**: Nếu trọng số liên kết được gán theo lưu lượng thực tế (Congestion-sensitive routing), thuật toán Dijkstra có thể khiến lưu lượng dồn qua dồn lại giữa các tuyến luân phiên, gây mất ổn định mạng nghiêm trọng.
 
 ---
 
 ### B. Thuật toán Distance-Vector (Bellman-Ford Algorithm)
+
 - **Nguyên lý**: Thuật toán phân tán, không đồng bộ và lặp (**Iterative, Asynchronous, Distributed**). Mỗi router không cần biết toàn bộ bản đồ mạng mà chỉ duy trì một **Vector khoảng cách (Distance Vector - DV)** lưu khoảng cách ước tính từ nó đến tất cả các nút mạng. Định kỳ (hoặc khi có thay đổi liên kết), router gửi vector này cho các hàng xóm trực tiếp kề nó.
+
 - **Phương trình Bellman-Ford (Công thức cốt lõi)**:
 
 $$d_x(y) = \min_v \left[ c(x, v) + d_v(y) \right]$$
 
   *Trong đó*:
+
   - $d_x(y)$: Chi phí đường đi ngắn nhất từ nút $x$ đến nút đích $y$.
+
   - $c(x, v)$: Chi phí liên kết trực tiếp từ nút $x$ đến nút lân cận (hàng xóm) $v$.
+
   - $d_v(y)$: Chi phí đường đi ngắn nhất từ hàng xóm $v$ đến đích $y$ (do $v$ thông báo cho $x$).
+
   - Phép lấy $\min_v$ được duyệt qua tất cả các hàng xóm trực tiếp $v$ của nút $x$. Nút hàng xóm $v^*$ mang lại giá trị nhỏ nhất chính là **cổng ra tiếp theo (Next Hop)** trên bảng chuyển tiếp của $x$.
 
 ---
@@ -1663,23 +1947,36 @@ MÔ HÌNH MẠNG THỬ NGHIỆM
 **Quá trình tính toán lặp từng vòng qua các thời điểm $t$:**
 
 1. **Khởi tạo ($t = 0$)**: Mỗi nút chỉ biết chi phí liên kết trực tiếp tới các hàng xóm kề nó; các nút còn lại chưa biết đường tới mang giá trị $\infty$:
+
    - $D_u = [u: 0, v: 2, w: \infty, x: 1, y: \infty, z: \infty]$
+
    - $D_v = [u: 2, v: 0, w: 3, x: 2, y: \infty, z: \infty]$
+
    - $D_w = [u: \infty, v: 3, w: 0, x: 3, y: 1, z: 5]$
+
    - $D_x = [u: 1, v: 2, w: 3, x: 0, y: 1, z: \infty]$
+
    - $D_y = [u: \infty, v: \infty, w: 1, x: 1, y: 0, z: 2]$
+
    - $D_z = [u: \infty, v: \infty, w: 5, x: \infty, y: 2, z: 0]$
 
 2. **Vòng lặp 1 ($t = 1$)**: Mỗi nút gửi Distance Vector của mình cho các hàng xóm trực tiếp.
+
    - Nút $u$ nhận $D_v$ từ hàng xóm $v$ và $D_x$ từ hàng xóm $x$, áp dụng phương trình Bellman-Ford:
+
      - Đến $w$: $D_u(w) = \min [ c(u, v) + D_v(w), c(u, x) + D_x(w) ] = \min [ 2 + 3, 1 + 3 ] = \min [ 5, 4 ] = 4$ (Next Hop: **x**).
+
      - Đến $y$: $D_u(y) = \min [ c(u, v) + D_v(y), c(u, x) + D_x(y) ] = \min [ 2 + \infty, 1 + 1 ] = 2$ (Next Hop: **x**).
+
      - Đến $z$: $D_u(z) = \min [ c(u, v) + D_v(z), c(u, x) + D_x(z) ] = \min [ 2 + \infty, 1 + \infty ] = \infty$.
      $\Rightarrow$ Vector tại $u$ sau vòng 1: $D_u^{(1)} = [u: 0, v: 2, w: 4, x: 1, y: 2, z: \infty]$.
+
    - Các nút khác cũng cập nhật song song (ví dụ: $x$ nhận $D_y$ nên phát hiện đường tới $z$: $D_x(z) = 1 + 2 = 3$; tối ưu đường tới $w$: $D_x(w) = \min [ 3, 1 + 1 ] = 2$ qua $y$).
 
 3. **Vòng lặp 2 ($t = 2$)**: Do vector của $x$ có thay đổi, $x$ gửi vector mới cho $u$. Nút $u$ tính toán lại:
+
    - Đến $w$: $D_u(w) = \min [ c(u, v) + D_v(w), c(u, x) + D_x(w) ] = \min [ 2 + 3, 1 + 2 ] = \min [ 5, 3 ] = \mathbf{3}$ (Next Hop: **x**).
+
    - Đến $z$: $D_u(z) = \min [ c(u, v) + D_v(z), c(u, x) + D_x(z) ] = \min [ 2 + \infty, 1 + 3 ] = \mathbf{4}$ (Next Hop: **x**).
    $\Rightarrow$ Vector tại $u$ sau vòng 2: $D_u^{(2)} = [u: 0, v: 2, w: 3, x: 1, y: 2, z: 4]$.
 
@@ -1712,25 +2009,40 @@ MÔ HÌNH VẤN ĐỀ ĐẾM ĐẾN VÔ CÙNG
 ```
 
 1. **Trạng thái bình thường**:
+
    - Nút $y$ đi thẳng tới $x$: $D_y(x) = 4$ (Cổng kế tiếp / Next Hop: **x**).
+
    - Nút $z$ đi qua $y$ ($z \to y \to x$): $D_z(x) = c(z, y) + D_y(x) = 1 + 4 = 5$ (rẻ hơn nhiều so với đi thẳng qua liên kết dự phòng $c(z, x) = 50$).
 
 2. **Khi sự cố xảy ra (Chi phí liên kết $x - y$ tăng đột biến từ 4 lên 60)**:
+
    - **Thời điểm $t_0$**: Nút $y$ phát hiện liên kết trực tiếp tới $x$ tăng vọt lên 60 ($c(y, x) = 60$). Nút $y$ tính lại theo Bellman-Ford:
+
      - Công thức tính: $D_y(x) = \min [ c(y, x), c(y, z) + D_z(x) ] = \min [ 60, 1 + 5 ] = 6$ (chọn đi qua **z**).
+
      - **Lỗi logic phát sinh**: Nút $y$ không hề biết con đường chi phí bằng 5 của $z$ thực chất lại đi ngược qua chính $y$!
+
      - Nút $y$ gửi thông báo mới cho $z$: $D_y(x) = 6$.
+
    - **Thời điểm $t_1$**: Nút $z$ nhận tin từ $y$, liền tính lại chi phí về $x$:
+
      - Công thức tính: $D_z(x) = \min [ c(z, x), c(z, y) + D_y(x) ] = \min [ 50, 1 + 6 ] = 7$ (vẫn chọn đi qua **y**).
+
      - Nút $z$ gửi lại thông báo mới cho $y$: $D_z(x) = 7$.
+
    - **Thời điểm $t_2$**: Nút $y$ nhận tin, tính lại $D_y(x) = 1 + 7 = 8$, rồi báo tiếp cho $z$...
+
    - **Vòng lặp đùn đẩy (Routing Loop)**: Hai nút $y$ và $z$ liên tục đùn đẩy nhau: $6 \to 7 \to 8 \to 9 \to \dots$
+
    - **Khi nào thì dừng lại?** Quá trình này chỉ dừng lại khi chi phí bị đùn đẩy vượt quá mốc **50** (chi phí của liên kết trực tiếp $c(z, x) = 50$). Lúc đó $z$ mới nhận ra đi thẳng trực tiếp tới $x$ với chi phí 50 rẻ hơn đi vòng qua $y$, và hệ thống mới hội tụ lại sau tận **44 vòng lặp**!
+
    - **Trường hợp đứt cáp hoàn toàn**: Nếu liên kết $x - y$ bị đứt hoàn toàn ($c = \infty$) và không có liên kết dự phòng 50, hai nút sẽ đùn đẩy nhau đếm mãi cho đến khi chạm ngưỡng vô cùng quy ước của giao thức (ví dụ $\infty = 16$ trong RIP).
 
 > [!NOTE]
 > **Giải pháp Kỹ thuật Poisoned Reverse**:
+>
 > - **Quy tắc**: Nếu nút $y$ định tuyến lưu lượng đến đích $x$ thông qua nút $z$, thì trong các bản tin quảng bá gửi riêng cho $z$, $y$ sẽ nói dối rằng: **Khoảng cách từ tôi đến $x$ là vô cùng** ($D_y(x) = \infty$).
+>
 > - Nhờ đó, $z$ sẽ không bao giờ định tuyến ngược lại qua $y$ khi liên kết gặp sự cố. Tuy nhiên, Poisoned Reverse chỉ giải quyết triệt để vòng lặp giữa 2 nút kề nhau, không giải quyết được vòng lặp từ 3 nút trở lên (vòng tròn $A \to B \to C \to A$).
 
 ---
@@ -1770,19 +2082,28 @@ KIẾN TRÚC ĐỊNH TUYẾN PHÂN CẤP INTERNET (INTRA-AS vs INTER-AS)
 
 ### A. Định tuyến nội vùng (Intra-AS / IGP - Interior Gateway Protocol)
 Chạy hoàn toàn bên trong ranh giới của một AS, tập trung tối đa vào **tốc độ và hiệu năng**:
+
 - **OSPF (Open Shortest Path First - RFC 2328)**:
+
   - Giao thức phổ biến nhất hiện nay trong các mạng doanh nghiệp lớn và mạng lõi ISP.
+
   - Sử dụng thuật toán **Link-State (Dijkstra)**, đóng gói trực tiếp trong IP Datagram (`Protocol = 89`).
+
   - Hỗ trợ phân cấp thành nhiều **Vùng (Areas)**: Vùng lõi trung tâm gọi là **Backbone Area (Area 0)**, các Area khác kết nối vào Backbone qua các **ABR (Area Border Routers)** để thu gọn bảng định tuyến.
+
   - Hỗ trợ chứng thực bảo mật (MD5/SHA) ngăn chặn chèn LSA giả mạo.
+
 - **RIP (Routing Information Protocol)**: Sử dụng Distance-Vector, giới hạn tối đa 15 Hops, chu kỳ phát sóng 30 giây (nay chỉ dùng cho mạng cổ điển hoặc phòng lab).
+
 - **IS-IS (Intermediate System to Intermediate System)**: Tương tự OSPF, chạy trực tiếp trên tầng liên kết, thường dùng trong mạng lõi của các Telco viễn thông quốc tế.
 
 ---
 
 ### B. Định tuyến liên vùng (Inter-AS / EGP): Giao thức BGP (Border Gateway Protocol v4 - RFC 4271)
 Được mệnh danh là **chất keo kết dính toàn bộ mạng Internet toàn cầu**. Chạy trên nền **TCP cổng 179** để đảm bảo độ tin cậy tuyệt đối:
+
 - **eBGP (External BGP)**: Chạy giữa các Router biên (Gateway Routers) của hai AS khác nhau để trao đổi thông tin khả đạt của các dải IP mạng (*Reachability information*).
+
 - **iBGP (Internal BGP)**: Chạy giữa các router bên trong cùng một AS để truyền bá thông tin về các tuyến đường mạng quốc tế nhận được từ eBGP.
 
 ```text
@@ -1800,11 +2121,17 @@ Mạng đích X ──> [ AS 3 ] ────(eBGP)────> [ AS 2 ] ──
 ```
 
 - **Các thuộc tính quan trọng của BGP Route (`Route = Prefix + Attributes`)**:
+
   - `AS-PATH`: Danh sách toàn bộ các ASN mà gói tin quảng bá đã đi qua. Cực kỳ quan trọng để **phát hiện và triệt tiêu vòng lặp định tuyến**.
+
   - `NEXT-HOP`: Địa chỉ IP của Router biên tiếp theo trên chặng đường rời khỏi AS.
+
 - **Định tuyến theo chính sách (Policy-Based Routing)**:
+
   - BGP **không nhất thiết chọn con đường ngắn nhất**, mà ưu tiên tối đa các **thỏa thuận kinh tế và chính sách bảo mật** giữa các AS (ví dụ: Nhà mạng Viettel có thể cấu hình từ chối chuyển tiếp lưu lượng miễn phí hộ cho đối thủ cạnh tranh).
+
 - **Kỹ thuật Hot-Potato Routing (Củ khoai tây nóng)**:
+
   - Router tìm cách tống khứ gói tin ra khỏi ranh giới AS của chính nó càng sớm càng tốt qua cổng Gateway gần nhất có chi phí nội bộ (IGP cost) thấp nhất, bất kể chặng đường tiếp theo bên ngoài dài bao nhiêu.
 
 ---
@@ -1847,8 +2174,11 @@ NGUYÊN LÝ HOẠT ĐỘNG CỦA LỆNH TRACEROUTE BẰNG ICMP TIME EXCEEDED
 
 ### B. SNMP (Simple Network Management Protocol)
 Giao thức chuẩn để quản trị viên giám sát trạng thái phần cứng, tải lưu lượng, nhiệt độ của các thiết bị mạng từ xa.
+
 - **SNMP Manager (Client)**: Trạm điều khiển trung tâm gửi truy vấn `GetRequest`, `SetRequest`.
+
 - **SNMP Agent (Server)**: Tiến trình chạy ngầm trên thiết bị mạng, lưu trữ thông số trạng thái trong cơ sở dữ liệu **MIB (Management Information Base)**.
+
 - **Trap Message**: Tín hiệu cảnh báo do Agent chủ động gửi về Manager khi thiết bị gặp sự cố bất thường (mất nguồn, cổng mạng bị down).
 
 ---
@@ -1861,15 +2191,24 @@ Giao thức chuẩn để quản trị viên giám sát trạng thái phần c�
 Trong khi Tầng Mạng (Network Layer) chịu trách nhiệm tìm đường và chuyển tiếp gói tin từ máy gửi tới máy nhận trên phạm vi toàn cầu (**Host-to-Host**), thì **Tầng Liên kết (Data Link Layer)** chịu trách nhiệm vận chuyển gói tin qua **từng chặng đơn lẻ (Hop-by-Hop)** giữa hai nút mạng kề nhau kết nối trực tiếp qua một đường truyền vật lý.
 
 - **Các thuật ngữ cơ bản**:
+
   - **Nút mạng (Nodes)**: Mọi thiết bị tham gia truyền thông ở tầng liên kết: Máy tính cá nhân, Máy chủ, Router, Switch...
+
   - **Đường liên kết (Links)**: Kênh truyền thông kết nối trực tiếp giữa các nút liền kề (Cáp xoắn đôi, Cáp quang, Sóng vô tuyến Wi-Fi).
+
   - **Khung dữ liệu (Frame)**: Đơn vị dữ liệu giao thức (PDU) của tầng liên kết, bao gồm IP Datagram từ Tầng 3 được kẹp giữa **Header** và **Trailer** tầng 2.
+
 - **Phân loại mạng theo phạm vi địa lý**:
   > **LAN < MAN < WAN < GAN**
+
   - **LAN (Local Area Network)**: Mạng cục bộ trong phạm vi một phòng, tòa nhà, văn phòng (dưới 1 km).
+
   - **MAN (Metropolitan Area Network)**: Mạng đô thị kết nối trong phạm vi một thành phố (vài chục km).
+
   - **WAN (Wide Area Network)**: Mạng diện rộng kết nối xuyên quốc gia, châu lục (hàng nghìn km).
+
   - **GAN (Global Area Network)**: Mạng toàn cầu kết nối toàn Trái Đất và các trạm vệ tinh không gian.
+
 - **Vị trí thực thi**: Tầng liên kết được tích hợp trực tiếp vào phần cứng **Card mạng (NIC - Network Interface Card)**, kết hợp giữa chip điều khiển phần cứng (*Link Controller*) và bộ điều khiển phần mềm của hệ điều hành.
 
 ---
@@ -1899,9 +2238,13 @@ Bên nhận:  [ Dữ liệu nhận D' ]   và   [ Mã nhận EDC' ]
 ```
 
 ### A. Kiểm tra chẵn lẻ (Parity Check)
+
 - **Single Parity (1 chiều)**: Đếm tổng số bit 1 trong khối dữ liệu, chèn thêm 1 bit Parity vào cuối sao cho tổng số bit 1 luôn là số chẵn (*Even Parity*) hoặc số lẻ (*Odd Parity*).
+
   - *Hạn chế*: Chỉ phát hiện được lỗi khi số lượng bit bị lật là **số lẻ** (1, 3, 5 bit). Nếu bị lật 2 bit cùng lúc, Parity Check hoàn toàn bị qua mặt.
+
 - **Two-Dimensional Parity (2 chiều)**: Xếp các byte dữ liệu thành một ma trận $m \times n$, tính bit Parity cho từng hàng và từng cột.
+
   - *Ưu điểm vượt trội*: Có khả năng **phát hiện và tự động sửa sai chính xác 1 bit lỗi** tại giao điểm của hàng và cột bị sai mà không cần yêu cầu truyền lại (*Forward Error Correction - FEC*).
 
 ### B. Internet Checksum (Mã kiểm tra bù 1)
@@ -1909,8 +2252,11 @@ Cộng toàn bộ các khối 16-bit dữ liệu lại với nhau, cộng dồn 
 
 ### C. Mã vòng dư thừa CRC (Cyclic Redundancy Check)
 Phương pháp toán học mạnh mẽ nhất, được cài đặt trực tiếp vào phần cứng của mọi card mạng Ethernet và Wi-Fi:
+
 - **Nguyên lý toán học**: Xem chuỗi dữ liệu $D$ (gồm $d$ bits) như một đa thức nhị phân. Bên gửi và bên nhận thống nhất trước một đa thức sinh chuẩn **$G$ (gồm $r+1$ bits)**, trong đó bit đầu và bit cuối luôn bằng 1.
+
 - **Quy tắc bên gửi**: Thêm $r$ bit 0 vào đuôi của $D$ (tương đương phép nhân $D \times 2^r$). Sau đó thực hiện phép **chia Modulo-2 (dùng phép XOR, không nhớ không mượn)** cho đa thức $G$ để thu được số dư $R$ (gồm đúng $r$ bits). Gắn $R$ vào đuôi dữ liệu để phát đi: $[D, R]$.
+
 - **Quy tắc bên nhận**: Lấy toàn bộ chuỗi $[D, R]$ nhận được chia Modulo-2 cho $G$. Nếu số dư $= 0 \implies$ Dữ liệu nguyên vẹn; nếu số dư $\neq 0 \implies$ Bị lỗi bit, lập tức hủy Frame.
 
 ```text
@@ -1965,23 +2311,34 @@ BA TRƯỜNG PHÁI GIAO THỨC ĐA TRUY CẬP (MAC PROTOCOLS)
 Chia tài nguyên kênh truyền có tổng băng thông $R$ thành các phần nhỏ hơn độc lập (theo thời gian, tần số hoặc mã), phân bổ cố định cho từng nút mạng sử dụng độc quyền $\implies$ **Hoàn toàn triệt tiêu nguy cơ xảy ra đụng độ (Collision-free)**.
 
 #### 1. TDMA (Time Division Multiple Access - Phân chia theo thời gian):
+
 - **Nguyên lý**: Kênh truyền được truy cập theo các vòng lặp, mỗi vòng chia thành $N$ khe thời gian cố định có độ dài đúng bằng thời gian truyền 1 gói tin.
+
 - **Cơ chế**: Mỗi nút mạng được phân bổ một khe thời gian cố định trong mỗi vòng. Nút chỉ được truyền dữ liệu ở tốc độ tối đa $R$ khi đến đúng khe của mình.
+
 - **Hạn chế**: Kém linh hoạt khi tải thấp; nếu nút không có dữ liệu cần gửi thì khe thời gian của nó bị bỏ trống, trong khi các nút khác vẫn bị giới hạn tốc độ trung bình ở mức $R/N$.
 
 #### 2. FDMA (Frequency Division Multiple Access - Phân chia theo tần số):
+
 - **Nguyên lý**: Dải phổ tần số của kênh truyền được chia thành $N$ dải tần hẹp hơn, mỗi dải có độ rộng băng thông $R/N$.
+
 - **Cơ chế**: Mỗi nút mạng được gán riêng một dải tần số cố định và có thể truyền dữ liệu liên tục mọi lúc mà không cần chờ đợi theo vòng.
+
 - **Hạn chế**: Tương tự TDMA, nếu một nút không truyền thì dải tần số đó bị lãng phí; tốc độ tối đa của mỗi nút bị khóa cứng ở $R/N$ ngay cả khi tất cả các nút khác đều không hoạt động.
 
 #### 3. CDMA (Code Division Multiple Access - Phân chia theo mã):
+
 - **Nguyên lý**: Tất cả các nút được phép truyền **đồng thời cùng lúc trên cùng một dải tần số**, nhưng mỗi nút được gán một **chuỗi mã định danh duy nhất (Chipping Sequence / Chipping Code)** có tính chất trực giao toán học với nhau.
+
 - **Cơ chế**: Dữ liệu của nút được nhân với chuỗi mã chip trước khi phát đi. Bên nhận dùng chính mã chip của nút gửi để giải mã (bằng phép nhân vô hướng / tích phân), triệt tiêu toàn bộ tín hiệu của các nút khác như thể chỉ là tạp âm nền ngẫu nhiên.
+
 - **Ứng dụng thực tế**: Mạng viễn thông di động 3G (WCDMA, CDMA2000), hệ thống định vị vệ tinh GPS và truyền thông quân sự kháng nhiễu/chống nghe lén.
 
 > [!NOTE]
 > **Đặc điểm đánh đổi (Trade-off) của Channel Partitioning**:
+>
 > - **Ưu điểm**: Hoạt động cực kỳ hiệu quả, công bằng và ổn định khi mạng có **tải cao (High Load)** vì không tốn băng thông hao phí do đụng độ.
+>
 > - **Nhược điểm**: Kém hiệu quả khi mạng có **tải thấp (Low Load)** vì tài nguyên bị chia cứng nhắc, gây lãng phí băng thông rảnh rỗi và tạo độ trễ truy cập kênh không đáng có.
 
 ---
@@ -1989,7 +2346,9 @@ Chia tài nguyên kênh truyền có tổng băng thông $R$ thành các phần 
 ### B. Nhóm Truy cập ngẫu nhiên (Random Access Protocols)
 
 #### 1. ALOHA và Slotted ALOHA:
+
 - **Pure ALOHA**: Bất kỳ nút mạng nào có dữ liệu đều phát đi ngay lập tức mà không kiểm tra đường truyền. Tỷ lệ đụng độ cực cao. Hiệu suất tối đa chỉ đạt **18.4%** ($1 / 2e$).
+
 - **Slotted ALOHA**: Thời gian được chia thành các khe (*Slots*) bằng nhau đúng bằng thời gian truyền 1 khung. Nút mạng chỉ được phép bắt đầu phát ở **điểm đầu của một khe thời gian**. Nếu đụng độ, chúng sẽ đụng độ ngay từ đầu khe. Hiệu suất tối đa tăng gấp đôi, đạt **36.8%** ($1 / e$).
 
 #### 2. Giao thức CSMA (Carrier Sense Multiple Access):
@@ -2007,9 +2366,13 @@ Triết lý kinh điển: *"Nghe trước khi nói (Listen before talk)"*. Trư�
 ---
 
 ### C. Nhóm Luân phiên lượt truyền (Taking-Turns Protocols)
+
 - **Polling (Hỏi vòng)**: Có một nút chủ (**Master Node**) lần lượt gửi thông điệp thăm dò từng nút con (**Slave Nodes**) theo vòng tròn: *"Bạn có dữ liệu cần gửi không?"*. Nút con chỉ được truyền khi có lệnh từ Master.
+
   - *Nhược điểm*: Polling Overhead (lãng phí băng thông trao đổi hỏi han), Độ trễ xếp hàng, và rủi ro **Single Point of Failure** (Master chết là toàn mạng sập).
+
 - **Token Passing (Chuyền thẻ bài)**: Các nút nối nhau thành một vòng tròn logic. Một khung dữ liệu đặc biệt gọi là **Token (Thẻ bài)** được luân chuyển tuần tự từ nút này sang nút khác. Nút nào đang nắm giữ Token mới có quyền phát dữ liệu lên đường truyền; phát xong phải trao lại Token cho nút kế tiếp.
+
   - *Nhược điểm*: Token Overhead, nếu chẳng may Token bị mất do nhiễu bit thì phải có quy trình bầu cử phức tạp để tái tạo Token mới.
 
 ---
@@ -2017,27 +2380,42 @@ Triết lý kinh điển: *"Nghe trước khi nói (Listen before talk)"*. Trư�
 ## 6.4. Địa chỉ MAC và Giao thức ARP (Address Resolution Protocol)
 
 ### A. Địa chỉ MAC (Media Access Control Address)
+
 - Địa chỉ định danh phần cứng vật lý dài **48 bits (6 Bytes)**, thường biểu diễn bằng 12 chữ số thập lục phân (Hexadecimal) ngăn cách bởi dấu hai chấm hoặc dấu gạch nối (ví dụ: `00:1A:2B:3C:4D:5E`).
+
 - **Cấu trúc 2 nửa**:
+
   - **24 bits đầu (3 Bytes)**: Mã định danh duy nhất của nhà sản xuất phần cứng **OUI (Organizationally Unique Identifier)** do tổ chức IEEE quản lý cấp phép.
+
   - **24 bits sau (3 Bytes)**: Số sê-ri card mạng do chính hãng sản xuất tự đánh số trên dây chuyền (*Burned-in Address*).
+
 - **Địa chỉ MAC Broadcast**: `FF:FF:FF:FF:FF:FF` (toàn bộ 48 bit là 1), gửi tới tất cả các card mạng trong cùng một mạng LAN.
 
 > [!IMPORTANT]
 > **Sự khác biệt cốt lõi giữa Địa chỉ IP và Địa chỉ MAC**:
+>
 > - **Địa chỉ IP (Tầng 3)**: Mang tính chất **phân cấp thứ bậc (Hierarchical)** giống như địa chỉ bưu điện nhà bạn (Quốc gia $\to$ Thành phố $\to$ Quận $\to$ Số nhà). Dùng để Router tìm đường dẫn đi xuyên qua các mạng khác nhau trên toàn cầu.
+>
 > - **Địa chỉ MAC (Tầng 2)**: Mang tính chất **phẳng (Flat)** giống như số Căn cước công dân (CCCD). Dù máy tính di chuyển tới bất kỳ mạng Wi-Fi hay văn phòng nào trên thế giới, địa chỉ MAC trên card mạng vẫn không đổi. Dùng cho Switch phân phát khung dữ liệu cục bộ trong cùng một mạng LAN.
 
 ---
 
 ### B. Giao thức ARP (Address Resolution Protocol - RFC 826)
+
 - **Bản chất cốt lõi**: Hiểu đơn giản thì ARP là một giao thức **ánh xạ địa chỉ IP sang địa chỉ MAC** (hoạt động ngay giữa ranh giới Tầng 2 và Tầng 3). Khi một máy tính biết địa chỉ IP đích của máy trong cùng mạng LAN nhưng chưa biết địa chỉ MAC tương ứng để đóng gói Ethernet Frame, nó sẽ dùng ARP để truy tìm địa chỉ MAC.
+
 - **Bảng ánh xạ ARP (ARP Table / ARP Cache)**: Giao thức ARP được thể hiện và duy trì thông qua bảng ARP Table lưu trữ tạm thời trong RAM của thiết bị với 3 thông số:
+
   - **IP address**: Địa chỉ IP của nút trong cùng mạng mạng LAN.
+
   - **MAC address**: Địa chỉ MAC tương ứng của card mạng đó.
+
   - **TTL (Time To Live)**: Thời gian sống của bản ghi trong bộ nhớ tạm (thường là 20 - 30 phút). Hết thời gian này, bản ghi tự động bị xóa (*Aging Timer*) để giải phóng bộ nhớ và cho phép cập nhật lại khi card mạng thay đổi.
+
 - **Thiết bị nào sở hữu ARP Table?**:
+
   - Cứ thiết bị nào cần xài địa chỉ IP để giao tiếp thì chắc chắn có ARP Table (từ điện thoại, máy tính ở *Network Edge* cho đến router ở *Network Core*).
+
   - Các ngoại lệ duy nhất chỉ là những thiết bị trung chuyển vật lý thuần túy (như Switch thường Tầng 2, Hub, dây cáp), vì chúng chỉ chuyển tiếp dựa trên tín hiệu vật lý hoặc địa chỉ MAC mà không quan tâm đến IP.
 
 - **Tiến trình hoạt động của ARP gồm 2 bước kinh điển**:
@@ -2066,8 +2444,11 @@ QUÁ TRÌNH HỎI ĐÁP PHÂN GIẢI ĐỊA CHỈ ARP TRONG MẠNG CỤC BỘ
 
 ## 6.5. Mạng cục bộ Ethernet (IEEE 802.3)
 Ethernet là công nghệ mạng cục bộ có dây thống trị tuyệt đối trong suốt hơn 4 thập kỷ qua.
+
 - **Hai đặc tính cốt lõi**:
+
   - **Connectionless (Không kết nối)**: Card mạng phát khung dữ liệu đi mà không cần trải qua quá trình bắt tay thiết lập kênh truyền.
+
   - **Unreliable (Không tin cậy)**: Khi nhận frame, nếu bộ kiểm tra CRC thấy có lỗi bit, card mạng lập tức **vứt bỏ Frame (Drop)** mà hoàn toàn không gửi thông báo lỗi hay yêu cầu gửi lại (việc phát hiện mất mát và gửi lại phụ thuộc hoàn toàn vào giao thức TCP ở tầng trên).
 
 ### Cấu trúc Khung dữ liệu Ethernet (Ethernet Frame Structure):
@@ -2080,20 +2461,32 @@ CHI TIẾT CẤU TRÚC KHUNG DỮ LIỆU ETHERNET (802.3 FRAME)
 ```
 
 - **Preamble (8 Bytes)**: Gồm 7 byte `10101010` dùng để đồng bộ hóa tốc độ xung nhịp (*Clock Synchronization*) giữa máy gửi và máy nhận, kết thúc bằng 1 byte `10101011` (**SFD - Start Frame Delimiter**) báo hiệu dữ liệu thực sự bắt đầu ngay phía sau.
+
 - **Destination & Source MAC (6 Bytes mỗi trường)**: Địa chỉ phần cứng của bên nhận và bên gửi.
+
 - **Type (2 Bytes)**: Cho biết giao thức Tầng 3 nằm trong Payload để đưa vào đúng tiến trình xử lý:
+
   - `0x0800`: IPv4 Datagram
+
   - `0x86DD`: IPv6 Datagram
+
   - `0x0806`: ARP Packet
+
 - **Data Payload (46 đến 1500 Bytes)**: Chứa gói tin IP Datagram.
+
   - **Quy tắc đệm dữ liệu (Padding)**: Kích thước Payload tối thiểu phải là **46 Bytes**. Nếu gói tin IP ngắn hơn 46 Bytes, card mạng phải chèn thêm các byte rác (`0x00`) cho đủ 46 Bytes.
+
   - **Nguyên nhân kỹ thuật**: Nhằm đảm bảo toàn bộ Ethernet Frame có độ dài tối thiểu là **64 Bytes** ($6 + 6 + 2 + 46 + 4 = 64$ Bytes). Kích thước tối thiểu 64 Bytes đảm bảo rằng máy gửi vẫn đang trong quá trình phát khung tín hiệu khi một xung đột ở xa nhất có thể phản hồi quay về, giúp cơ chế CSMA/CD phát hiện đụng độ thành công!
+
 - **CRC / FCS (4 Bytes)**: Mã kiểm tra phần cứng 32-bit (Cyclic Redundancy Check) phát hiện lỗi bit.
 
 > [!NOTE]
 > **Tại sao Preamble (8 Bytes) không được tính vào kích thước Ethernet Frame?**
+>
 > - **Thuộc Tầng Vật lý (Layer 1)**: Preamble chỉ là chuỗi xung nhịp vật lý giúp chip thu phát PHY đồng bộ hóa tần số (*Clock Sync*). Ngay khi nhận diện xong byte báo hiệu SFD, chip PHY sẽ **bóc bỏ (strip)** toàn bộ 8 byte này trước khi chuyển giao khung dữ liệu lên Tầng 2 (MAC Controller).
+>
 > - **Không được bảo vệ bởi CRC**: Vùng tính toán của mã CRC-32 chỉ tính từ `Dest MAC` đến hết `Payload`, hoàn toàn loại trừ Preamble.
+>
 > - **Quy chuẩn IEEE 802.3**: Khung Ethernet chuẩn chỉ tính từ **Destination MAC** đến hết **CRC/FCS** (kích thước tối thiểu là **64 Bytes**, tối đa là **1518 Bytes**). Vì vậy, các công cụ phân tích mạng như Wireshark không bao giờ hiển thị 8 byte Preamble này.
 
 ---
@@ -2103,11 +2496,17 @@ Switch là thiết bị mạng Tầng 2 giúp lọc và chuyển tiếp các fra
 
 ### A. Cơ chế Tự học (Self-Learning) & Bảng chuyển mạch (Switch Table / CAM Table)
 Switch hoạt động theo triết lý "Cắm là chạy (*Plug-and-Play*)", hoàn toàn không cần cấu hình thủ công:
+
 1. Khi có một frame đi vào cổng $x$, switch đọc địa chỉ **Source MAC**.
+
 2. Nó ghi nhớ ngay cặp thông tin: `[Source MAC, Cổng x, TTL (Time-To-Live)]` vào bảng **CAM (Content Addressable Memory)**.
+
 3. Tiếp theo, switch đọc địa chỉ **Destination MAC** trong frame để đưa ra quyết định:
+
    - **Đã có Destination MAC trong bảng**: Chuyển tiếp khung ra **đúng cổng đích duy nhất**.
+
    - **Chưa có Destination MAC trong bảng**: Thực hiện tràn luồng (**Flooding**) - gửi nhân bản khung ra tất cả các cổng còn lại (trừ cổng nhận vào).
+
    - **Destination MAC là Broadcast (`FF:FF...FF`)**: Gửi tràn ra tất cả các cổng còn lại.
 
 ```text
@@ -2150,11 +2549,15 @@ Kịch bản 2: Máy B phản hồi gửi frame cho Máy A:
 
 ### C. Mạng cục bộ ảo (VLAN - Virtual Local Area Network - IEEE 802.1Q)
 Trong các doanh nghiệp lớn, việc tất cả các phòng ban (Kế toán, Nhân sự, Lập trình viên, Khách vãng lai) cắm chung vào các switch sẽ gây ra 2 hiểm họa lớn:
+
 1. **Lãng phí băng thông**: Các gói tin Broadcast (ARP, DHCP) chạy tràn lan khắp toàn bộ tòa nhà.
+
 2. **Nguy cơ mất an toàn thông tin**: Máy tính của khách có thể dễ dàng nghe lén dữ liệu nội bộ của phòng Kế toán.
 
 - **VLAN**: Kỹ thuật phân chia một switch vật lý thành nhiều **Switch logic độc lập**. Các máy tính thuộc các VLAN khác nhau hoàn toàn bị cách ly miền quảng bá, không thể nhìn thấy nhau (muốn liên lạc bắt buộc phải đi qua Router Tầng 3 hoặc Layer-3 Switch).
+
 - **Cổng Trunk (Trunk Port)**: Đường liên kết vật lý duy nhất nối giữa các switch với nhau, có khả năng vận chuyển lưu lượng của nhiều VLAN cùng lúc.
+
 - **Tiêu chuẩn IEEE 802.1Q (VLAN Tagging)**: Để switch ở đầu bên kia biết được frame đang truyền thuộc về VLAN nào, switch gửi sẽ chèn thêm một thẻ phụ dài **4 Bytes (802.1Q Tag)** vào ngay sau địa chỉ Source MAC:
 
 ```text
@@ -2170,6 +2573,7 @@ CẤU TRÚC ETHERNET FRAME CÓ CHÈN THẺ IEEE 802.1Q VLAN TAG
 │                (16 bits / 2B)                 │   (3 bits)    │ (1 bit) │     (12 bits)      │
 └───────────────────────────────────────────────┴───────────────┴─────────┴────────────────────┘
 ```
+
 - **VID (VLAN ID - 12 bits)**: Định danh số hiệu của mạng VLAN (cho phép tạo tối đa $2^{12} = 4096$ mạng VLAN logic trên cùng hạ tầng vật lý).
 
 ---
@@ -2179,9 +2583,13 @@ CẤU TRÚC ETHERNET FRAME CÓ CHÈN THẺ IEEE 802.1Q VLAN TAG
 > 📄 **Slide bài giảng:** [Chapter_7_v9.0.pdf](.pdf/Chapter_7_v9.0.pdf)
 
 ## 7.1. Đặc thù của Môi trường truyền không dây
+
 1. **Suy giảm tín hiệu (Path Loss / Attenuation)**: Tín hiệu sóng điện từ suy hao theo khoảng cách và vật cản.
+
 2. **Giao thoa đa nguồn (Interference)**: Dải tần số 2.4 GHz dùng chung giữa Wi-Fi, sóng Bluetooth và nhiều thiết bị gia dụng.
+
 3. **Lan truyền đa đường (Multipath Propagation)**: Sóng phản xạ đập vào vật cản tới ăng-ten thu vào các thời điểm lệch nhau.
+
 4. **Vấn đề trạm ẩn (Hidden Terminal Problem)**: Hai máy trạm $A$ và $C$ không nghe thấy nhau nhưng cùng giao tiếp với Access Point $B$, dẫn đến việc phát tín hiệu đồng thời làm xung đột tại $B$.
 
 ```text
@@ -2199,8 +2607,11 @@ HIỆN TƯỢNG TRẠM ẨN (HIDDEN TERMINAL PROBLEM)
 
 ## 7.2. Giao thức Wi-Fi (IEEE 802.11) & Cơ chế bắt tay RTS / CTS
 Để giải quyết bài toán trạm ẩn, chuẩn 802.11 bổ sung cơ chế bắt tay bảo lưu kênh truyền:
+
 1. Trạm gửi một khung tin ngắn **RTS (Request to Send)** báo trước kích thước dữ liệu và thời gian cần chiếm giữ kênh.
+
 2. Access Point nếu đồng ý sẽ phát thanh khung **CTS (Clear to Send)** tới toàn bộ các trạm xung quanh.
+
 3. Tất cả các trạm khác khi nghe thấy CTS sẽ tự động thiết lập bộ đếm **NAV (Network Allocation Vector)** và im lặng nhường đường cho trạm kia truyền dữ liệu.
 
 ```text
@@ -2217,12 +2628,19 @@ CẤU TRÚC KHUNG 802.11 FRAME (CHỨA 4 ĐỊA CHỈ MAC)
 ---
 
 ## 7.3. Mạng Di động (Cellular Networks: 4G LTE & 5G)
+
 - **Kiến trúc 4G LTE**:
+
   - `UE (User Equipment)`: Thiết bị di động của người dùng.
+
   - `eNodeB`: Trạm thu phát sóng vô tuyến di động.
+
   - `EPC (Evolved Packet Core)`: Mạng lõi chuyển mạch gói gồm **MME** (quản lý di động và báo hiệu), **SGW** (Serving Gateway phục vụ chuyển tiếp dữ liệu), và **PGW** (Packet Gateway kết nối ra Internet).
+
 - **Mạng 5G**:
+
   - Hỗ trợ ba trụ cột: **eMBB** (băng thông siêu rộng), **URLLC** (độ trễ siêu thấp cỡ mili-giây), và **mMTC** (kết nối hàng triệu thiết bị IoT).
+
   - Áp dụng kỹ thuật **Network Slicing** để chia sẻ hạ tầng vật lý thành nhiều mạng ảo phục vụ các nhu cầu khác nhau.
 
 ---
@@ -2232,9 +2650,13 @@ CẤU TRÚC KHUNG 802.11 FRAME (CHỨA 4 ĐỊA CHỈ MAC)
 > 📄 **Slide bài giảng:** [Chapter_8_v9.0.pdf](.pdf/Chapter_8_v9.0.pdf)
 
 ## 8.1. Các mục tiêu an toàn mạng cốt lõi
+
 - **Bảo mật (Confidentiality)**: Chỉ bên gửi và bên nhận hợp lệ mới đọc được nội dung thông điệp (sử dụng mã hóa).
+
 - **Toàn vẹn (Integrity)**: Đảm bảo thông điệp không bị thay đổi hoặc giả mạo trên đường truyền (sử dụng hàm băm và MAC).
+
 - **Xác thực (Authentication)**: Khẳng định chính xác danh tính của đối tác giao tiếp (chứng thực hai chiều).
+
 - **Tính khả dụng (Availability)**: Hệ thống luôn sẵn sàng phục vụ người dùng hợp lệ.
 
 ---
@@ -2270,22 +2692,32 @@ HAI PHƯƠNG PHÁP MÃ HÓA CƠ BẢN
 
 ### A. Giao thức TLS 1.3 (Transport Layer Security - Tầng Giao vận)
 Nằm kẹp giữa Tầng Ứng dụng và TCP, mã hóa toàn bộ dữ liệu trước khi đẩy xuống mạng:
+
 - Rút ngắn thời gian bắt tay xuống còn **1 RTT (Round-Trip Time)** (hoặc 0 RTT khi kết nối lại).
+
 - Bắt buộc dùng cơ chế trao đổi khóa **Ephemeral Diffie-Hellman**, hỗ trợ tính năng **Perfect Forward Secrecy (PFS)**.
 
 ### B. Bộ giao thức IPsec (IP Security - Tầng Mạng)
 Bảo vệ dòng dữ liệu ở Tầng 3:
+
 - **AH (Authentication Header)**: Cung cấp tính toàn vẹn và xác thực nguồn gốc (không mã hóa).
+
 - **ESP (Encapsulating Security Payload)**: Cung cấp cả tính toàn vẹn và mã hóa payload.
+
 - **Transport Mode** (bảo vệ truyền thông Host-to-Host) vs **Tunnel Mode** (đóng gói toàn bộ gói IP, dùng cho VPN Site-to-Site).
 
 ---
 
 ## 8.4. Tường lửa (Firewalls) và Hệ thống Giám sát (IDS / IPS)
+
 - **Stateless Packet Filter**: Lọc gói dựa trên quy tắc tĩnh (IP nguồn/đích, Port nguồn/đích, cờ TCP).
+
 - **Stateful Inspection Firewall**: Theo dõi trạng thái của các kết nối TCP để chỉ cho phép các gói tin phản hồi hợp lệ đi vào.
+
 - **Application Gateway (Proxy Tầng 7)**: Đọc sâu vào nội dung thông điệp tầng ứng dụng để kiểm soát dữ liệu.
+
 - **IDS (Intrusion Detection System)**: Lắng nghe bản sao lưu lượng để phát hiện và cảnh báo hành vi bất thường.
+
 - **IPS (Intrusion Prevention System)**: Đặt chắn ngang đường truyền để chủ động ngăn chặn và loại bỏ các gói tin độc hại.
 
 ---
